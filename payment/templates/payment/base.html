@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{%block title%}Home{%endblock%}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+
+    <!--Loads path to static files-->
+    {% load staticfiles %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'payment/style.css' %}"/>
+    <script src="https://kit.fontawesome.com/1207f48605.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <section>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="{% url 'home:index'%}"><img src="\static\home\images\logobg.jpg"  style="height: 100px;width: 150px;"></a>
+            </div>
+            <div class="col-md-8">
+            <a href="{% url 'home:index'%}"><h1>Pangani youth soccer Academy</h1></a>
+            </div>
+        </div>
+    </section>
+                
+    <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        
+        <!--Logo-->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{%url 'home:index'%}"><i class="fas fa-futbol"></i></a>
+            <a class="navbar-brand" href="{%url 'home:index'%}">Pangani youth soccer academy</a>
+        </div>
+
+        <!--Menu items-->
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="nav navbar-nav">
+                <li class="">
+                    <a href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp; logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+
+{%block body%}
+{%endblock%}
+{%block footer%}
+{%endblock%}
+</body>
+</html>
