@@ -1,5 +1,6 @@
-body{
-    background: url();
+html, body{
+    font-family: 'Roboto', sans-serif;
+    color: #222;
 }
 
 
@@ -20,7 +21,7 @@ body{
 } */
 
         /* logo section */
-section{
+.logo-section {
     background: rgb(32, 31, 31);
 }
 section h1{

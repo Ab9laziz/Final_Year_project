@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title> {%block title%}Home{%endblock%} | Pangani Youth Soccer Academy</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+
+    <!--Loads path to static files-->
+    {% load static %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/1207f48605.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+    {% include 'home/header.html' %}
+
+    {% block content %} {% endblock %}
+
+    <footer class= "mt-4">
+<div class="footer-top">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-12 segment-one">
+        <h3>Pangani Youth Soccer Academy</h3>
+        <p>Soccer youth system designed to nurture the youngins in the society </p>
+      </div>
+
+      <div class="col-md-3 col-sm-6 col-xs-12 segment-two">
+        <h2>Useful Links</h2>
+        <ul>
+          <li><a href="#">News</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Tours</a></li>
+          <li><a href="#">Programs</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3 col-sm-6 col-xs-12 segment-three">
+        <h2>Follow Us</h2>
+        <p>Follow us on social media</p>
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-pinterest"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+      </div>
+
+      <div class="col-md-3 col-sm-6 col-xs-12 segment-four">
+        <h2>Our Newsletter</h2>
+        <p>Send us your mail to get news on all issues Pangani Youth Soccer Academy</p>
+        <form action="">
+          <input type="email">
+          <input type="submit" value="subscribe">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="footer-bottom-text">All Rights reserved by &copy; PYSA {% now 'Y' %}</p>
+</footer>
+    <script>
+        {% if messages %}
+        {% for message in messages %}
+        $(document).ready(function () {
+            swal({
+                title: "{{ message }}",
+                icon: "{{ message.tags }}",
+                timer: 2000,
+            });
+        });
+        {% endfor %}
+        {% endif %}
+    </script>
+    {%block body%}
+    {%endblock%}
+    {%block footer%}
+    {%endblock%}
+</body>
+
+</html>

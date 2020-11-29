@@ -1,0 +1,37 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+    Player - Upload Consent Form
+{% endblock %}
+
+
+{% block content %}
+    <section class="bg-success h-25"></section>
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card shadow-sm border-0 contact-header mb-4">
+                        <div class="card-body">
+                            <div class="py-3">
+                                <h5 class="text-center font-weight-normal"> {{ player.user.get_full_name }}</h5>
+                                <p class="text-center font-weight-normal text-muted">
+                                    Upload Parent Consent Form
+                                </p>
+                            </div>
+                            <div class="col-md-6 py-3 mx-auto">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {% include 'partials/forms/form.html' %}
+                                    <div class="text-center py-4">
+                                        <button class="btn btn-success text-transform-none px-5">Save Details</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

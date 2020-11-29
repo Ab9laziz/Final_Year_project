@@ -51,5 +51,5 @@ Create local development branch and switch to it:
 Make desired changes then commit the branch.
 
     git add .
-    git commit -m "changes to{feature_branch_name}
+    git commit -m "changes to{feature_branch_name}"
     git push origin {feature_branch_name}
