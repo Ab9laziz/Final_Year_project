@@ -5,10 +5,10 @@
 
   <ul class="list-unstyled components">
     <li>
-      <a href="#">Notifications</a>
+      <a href="{% url 'dashboard:players:players_list' %}" class="{% if '/players' in request.path %}active{% endif %}">Players</a>
     </li>
     <li>
-      <a href="#">Player Profile</a>
+      <a href="{% url 'dashboard:players:players_list' %}" class="{% if '/trainers' in request.path %}active{% endif %}">Trainers</a>
     </li>
 
     <li>
@@ -18,7 +18,7 @@
       <a href="#">Check Balance</a>
     </li>
     <li>
-      <a href="#">Fixtures</a>
+      <a href="{% url 'dashboard:players:players_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
     </li>
   </ul>
 </nav>

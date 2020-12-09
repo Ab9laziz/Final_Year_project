@@ -20,7 +20,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!--Logo-->
-    <div class="navbar-header">
+    {% comment %} <div class="navbar-header">
       <button
         type="button"
         class="navbar-toggle"
@@ -37,7 +37,7 @@
       <a class="navbar-brand" href="{% url 'index' %}"
         >Pangani youth soccer academy</a
       >
-    </div>
+    </div> {% endcomment %}
 
     <!--Menu items-->
 
@@ -45,9 +45,30 @@
       <ul class="nav navbar-nav">
         <li class="">
           <a href="{% url 'index' %}"
-            ><span class="glyphicon glyphicon-home"></span>&nbsp; Home</a
+            ><span class="glyphicon glyphicon-home"></span> Home</a
           >
         </li>
+        <li class="">
+          <a href=""
+            ><span class="glyphicon glyphicon-envelope"></span> Contact</a
+          >
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        {% if request.user.is_authenticated %}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+            ><span class="glyphicon glyphicon-user"></span>&nbsp; {{ request.user.get_full_name }}
+            <span class="caret"></span
+          ></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Portal</a></li>
+            <li><a href="#">My Profile</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        </li>
+        {% else %}
         <li class="">
           <a href="{% url 'account_login' %}"
             ><span class="glyphicon glyphicon-log-in"></span>&nbsp; Login</a
@@ -58,23 +79,7 @@
             ><span class="glyphicon glyphicon-user"></span>&nbsp; Register</a
           >
         </li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item sm-device-none mr-3">
-          <i class="fa fa-clock-o"></i> <span id="clock">Loading...</span>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-            ><span class="glyphicon glyphicon-info-sign"></span>&nbsp; About
-            <span class="caret"></span
-          ></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">General information</a></li>
-            <li><a href="#">Admission policy</a></li>
-            <li><a href="#">Fee payment policy</a></li>
-          </ul>
-        </li>
+        {% endif %}
       </ul>
     </div>
   </div>

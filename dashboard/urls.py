@@ -3,7 +3,8 @@ from django.urls import path, include
 app_name = "dashboard"
 
 urlpatterns = [
-    path('', include('dashboard.routes.index'))
+    path('', include('dashboard.routes.index')),
+    path('players/', include('dashboard.routes.players'))
 ]
 
 
