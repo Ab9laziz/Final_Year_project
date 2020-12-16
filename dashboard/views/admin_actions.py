@@ -14,9 +14,9 @@ def suspend_user(request, pk):
     if(user.role == 'player'):
         messages.success(request,"Account Suspended")
         return redirect("dashboard:players:player_details", pk=pk)
-    # elif(user.role == 'admin'):
-    #     messages.success(request,"Account Suspended")
-    #     return redirect("dashboard:admin_details", pk=pk)
+    elif(user.role == 'trainer'):
+        messages.success(request,"Account Suspended")
+        return redirect("dashboard:trainers:trainer_details", pk=pk)
     # elif(user.role == 'instructor'):
     #     messages.success(request,"Account Suspended")
     #     return redirect("dashboard:instructor_details", pk=pk)
@@ -30,9 +30,9 @@ def activate_user(request,pk):
     if(user.role == 'player'):
         messages.success(request,"Account activated")
         return redirect("dashboard:players:player_details", pk=pk)
-    # elif(user.role == 'admin'):
-    #     messages.success(request,"Account activated")
-    #     return redirect("dashboard:admin_details", pk=pk)
+    elif(user.role == 'trainer'):
+        messages.success(request,"Account activated")
+        return redirect("dashboard:trainers:trainer_details", pk=pk)
     # elif(user.role == 'instructor'):
     #     messages.success(request,"Account activated")
     #     return redirect("dashboard:instructor_details", pk=pk)

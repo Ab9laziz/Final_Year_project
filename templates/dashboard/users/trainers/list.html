@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-    All Players
+    All Trainers
 {% endblock %}
 
 {% block styles %}
@@ -15,7 +15,12 @@
         <div class="col-md-12">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h4 class="text-center py-3">All Players</h4>
+                    <h4 class="text-center py-3">All Trainers</h4>
+                    <div class="d-flex justify-content-end mb-2">
+                    <a href="{% url 'dashboard:trainers:trainer_add' %}">
+                        <button class="btn btn-primary btn-sm">Add New Trainer</button>
+                    </a>
+                </div>
                     <table class="table table-striped py-3" id="data_table">
                         <thead>
                         <tr>
@@ -47,7 +52,7 @@
                                     </td>
                                 {% endif %}
                                 <td>
-                                    <a href="{% url 'dashboard:players:player_details' user.pk %}">
+                                    <a href="{% url 'dashboard:trainers:trainer_details' user.pk %}">
                                         <button class="btn btn-primary btn-sm">View</button>
                                     </a>
                                 </td>

@@ -1,4 +1,4 @@
-{% extends 'dashboard/base.html' %} {% load static %} {% block title %} Player Details
+{% extends 'dashboard/base.html' %} {% load static %} {% block title %} Trainer Details
 {% endblock %}
 {% block styles %}
     <link rel="stylesheet" href="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.css' %}">
@@ -43,7 +43,7 @@
           </div>
           <div class="col-md-8">
             <div class="m-3 p-3 shadow-sm">
-              <h3 class="text-center py-3">Player Details</h3>
+              <h3 class="text-center py-3">Trainer Details</h3>
               <div class="table-responsive">
                 <table class="table table-striped">
                   <tbody>
@@ -62,6 +62,14 @@
                     <tr>
                       <th>Gender</th>
                       <td>{{ user.gender }}</td>
+                    </tr>
+                    <tr>
+                      <th>ID No.</th>
+                      <td>{{ user.id_no }}</td>
+                    </tr>
+                    <tr>
+                      <th>Staff ID</th>
+                      <td>{{ user.staff_id }}</td>
                     </tr>
                     <tr>
                       <th>Status</th>

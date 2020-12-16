@@ -13,9 +13,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
                     class="glyphicon glyphicon-user"></span>&nbsp; {{ request.user.get_full_name }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="#">General information</a></li>
-                <li><a href="#">Admission policy</a></li>
-                <li><a href="#">Fee payment policy</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </li>
     </ul>
