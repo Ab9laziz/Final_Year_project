@@ -20,5 +20,8 @@
     <li>
       <a href="{% url 'dashboard:players:players_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
     </li>
+    <li>
+      <a href="{% url 'dashboard:index:consent_forms_list' %}" class="{% if '/consent-forms' in request.path %}active{% endif %}">Consent Form</a>
+    </li>
   </ul>
 </nav>
