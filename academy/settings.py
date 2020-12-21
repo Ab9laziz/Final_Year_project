@@ -11,7 +11,7 @@ from django.contrib.messages import constants as messages
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 FRONTEND_HOST = config('FRONTEND_HOST')
