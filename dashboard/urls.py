@@ -6,6 +6,7 @@ urlpatterns = [
     path('', include('dashboard.routes.index')),
     path('players/', include('dashboard.routes.players')),
     path('trainers/', include('dashboard.routes.trainers')),
+    path('fixtures/', include('dashboard.routes.fixtures')),
 ]
 
 

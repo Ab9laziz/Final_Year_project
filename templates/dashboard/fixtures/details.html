@@ -1,0 +1,91 @@
+{% extends 'dashboard/base.html' %} {% load static %} {% block title %} Fixture Details
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 p-3 text-center">
+            <div class="py-5">
+              {% if fixture.picture %}
+              <img
+                src="{{ fixture.picture.url }}"
+                alt=" PYSA {{ fixture.name }}"
+                class="w-50"
+                style="width:50%;"
+              />
+              {% else %}
+              <img
+                src="{% static 'home/images/logo.png' %}"
+                alt="{{ fixture.name }}"
+                style="width:50%;"
+              />
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="m-3 p-3 shadow-sm">
+              <h3 class="text-center py-3">Fixture Details</h3>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <th>Name</th>
+                      <td>{{ fixture.name }}</td>
+                    </tr>
+                    <tr>
+                      <th>Description</th>
+                      <td>{{ fixture.description }}</td>
+                    </tr>
+                    <tr>
+                      <th>Players</th>
+                      <td>{{ fixture.starting_players.count }}</td>
+                    </tr>
+                    <tr>
+                      <th>Added</th>
+                      <td>{{ fixture.created_on }}</td>
+                    </tr>
+                    <tr>
+                      <th>Last Update</th>
+                      <td>{{ fixture.last_update }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+               {% comment %} <div class="text-center py-3">
+                  <a
+                    href="{% url 'dashboard:index:fixture_confirm_suspension' fixture.pk %}"
+                    class="mx-1"
+                  >
+                    <button class="btn btn-warning btn-md w-50">Delete</button>
+                  </a>
+
+                  <a
+                    href="{% url 'dashboard:index:fixture_unsuspend_action' fixture.pk %}"
+                    class="mx-1"
+                  >
+                    <button class="btn btn-success btn-md w-50">
+                      Edit
+                    </button>
+                  </a>
+                </div> 
+              </div> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'dashboard/data-tables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.js' %}"></script>
+    <!--init datatable-->
+    <script src="{% static 'dashboard/data-tables/init-datatable.js' %}"></script>
+{% endblock %}
