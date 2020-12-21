@@ -87,7 +87,14 @@ a, a:hover, a:focus {
     padding: 10px;
     font-size: 1.1em;
     display: block;
+    color: #fff;
 }
+
+#sidebar ul li .active {
+    color: #555;
+    background: #fff;
+}
+
 #sidebar ul li a:hover {
     color: #7386D5;
     background: #fff;

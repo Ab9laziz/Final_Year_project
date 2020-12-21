@@ -17,6 +17,8 @@ def logout_user(request):
 def login_redirect(request):
     if request.user.is_staff is False:
         return redirect('players:profile_update', pk=request.user.pk)
+    elif request.user.role == 'admin':
+        return redirect('dashboard:index:index')
     else:
         return redirect('index')
 

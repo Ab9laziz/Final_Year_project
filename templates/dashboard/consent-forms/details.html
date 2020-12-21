@@ -1,0 +1,47 @@
+{% extends 'dashboard/base.html' %} {% load static %} {% block title %} Consent Form Details
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-10 mx-auto">
+            <div class="m-3 p-3 shadow-sm">
+              <h3 class="text-center py-3">Consent Form Details</h3>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <th>Form</th>
+                      <td><a href ="{{form.document.url}}" target="blank"> Preview Form </a></td>
+                    </tr>
+                    <tr>
+                      <th>Uploaded</th>
+                      <td>{{ form.created_on }}</td>
+                    </tr>
+                    <tr>
+                      <th>Last Update</th>
+                      <td>{{ form.last_update }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+               <div class="text-center py-3">
+                  <a
+                    href="{% url 'dashboard:index:consent_form_edit' form.pk %}"
+                    class="mx-1"
+                  >
+                    <button class="btn btn-primary btn-md w-50">Edit</button>
+                  </a>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

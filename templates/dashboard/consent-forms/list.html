@@ -1,0 +1,57 @@
+{% extends 'dashboard/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block title %}
+    Consent Form
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="text-center py-3">All Consent Forms</h4>
+                    {% if forms.count == 0 %}
+                    <div class="d-flex justify-content-end mb-2">
+                    <a href="{% url 'dashboard:index:consent_form_add' %}">
+                        <button class="btn btn-primary btn-sm">Add New Consent Form</button>
+                    </a>
+                </div>
+                {% endif %}
+                    <table class="table table-striped py-3" id="data_table">
+                        <thead>
+                        <tr>
+                            <th>Added</th>
+                            <th>Last Update</th>
+                        </thead>
+                        <tbody>
+                        {% for form in forms %}
+                            <tr>
+                                <td> {{ form.created_on }}</td>
+                                <td> {{ form.last_update }}</td>
+                                <td>
+                                    <a href="{% url 'dashboard:index:consent_form_details' form.pk %}">
+                                        <button class="btn btn-primary btn-sm">View</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'dashboard/data-tables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.js' %}"></script>
+    <!--init datatable-->
+    <script src="{% static 'dashboard/data-tables/init-datatable.js' %}"></script>
+{% endblock %}
