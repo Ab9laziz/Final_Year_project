@@ -24,7 +24,15 @@
 <body>
     {% include 'dashboard/header.html' %}
     <div class="wrapper container-fluid">
-        {% include 'dashboard/side-nav.html' %}
+
+    {% if request.user.role == 'admin' %}
+    {% include 'dashboard/side-nav.html' %}
+    {% elif request.user.role == 'player' %}
+    {% include 'player-dashboard/side-nav.html' %}
+    {% elif request.user.role == 'trainer' %}
+    {% include 'trainer-dashboard/side-nav.html' %}
+    {% endif %}
+
         <div id="content">
             <div class="container-fluid">
                 {% block content %}{% endblock %}

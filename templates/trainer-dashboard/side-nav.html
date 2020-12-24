@@ -1,0 +1,17 @@
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <h4>PYSA Trainers Dashboard</h4>
+  </div>
+
+  <ul class="list-unstyled components">
+    <li>
+      <a href="{% url 'dashboard:players:players_list' %}" class="{% if '/players' in request.path %}active{% endif %}">Players</a>
+    </li>
+    <li>
+      <a href="{% url 'dashboard:fixtures:fixtures_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
+    </li>
+    <li>
+      <a href="{% url 'dashboard:sessions:sessions_list' %}" class="{% if '/sessions' in request.path %}active{% endif %}">Training Sessions</a>
+    </li>
+  </ul>
+</nav>

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'home',
     'payment',
     'portal',
+    'player_dashboard',
+    'trainer_dashboard',
     'users',
 
 ]

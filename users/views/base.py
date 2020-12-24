@@ -19,6 +19,8 @@ def login_redirect(request):
         return redirect('players:profile_update', pk=request.user.pk)
     elif request.user.role == 'admin':
         return redirect('dashboard:index:index')
+    elif request.user.role == 'trainer':
+        return redirect('trainer_dashboard:index:index')
     else:
         return redirect('index')
 
@@ -26,7 +28,6 @@ def login_redirect(request):
 
 class LoginUserView(LoginView):
     def get_success_url(self):
-        print('here')
         return reverse_lazy('login_redirect')
 
 def register_redirect(request):
