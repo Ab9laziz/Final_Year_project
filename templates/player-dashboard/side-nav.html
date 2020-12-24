@@ -1,0 +1,20 @@
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <h4>PYSA Player Dashboard</h4>
+  </div>
+
+  <ul class="list-unstyled components">
+    <li>
+      <a href="{% url 'dashboard:fixtures:fixtures_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
+    </li>
+    <li>
+      <a href="{% url 'dashboard:sessions:sessions_list' %}" class="{% if '/sessions' in request.path %}active{% endif %}">Training Sessions</a>
+    </li>
+     <li>
+      <a href="#">Fee Payment</a>
+    </li>
+    <li>
+      <a href="{% url 'dashboard:index:consent_forms_list' %}" class="{% if '/profile' in request.path %}active{% endif %}">My Profile</a>
+    </li>
+  </ul>
+</nav>

@@ -15,10 +15,10 @@
       <a href="#">Fee Payment</a>
     </li>
     <li>
-      <a href="#">Check Balance</a>
+      <a href="{% url 'dashboard:fixtures:fixtures_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
     </li>
     <li>
-      <a href="{% url 'dashboard:fixtures:fixtures_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
+      <a href="{% url 'dashboard:sessions:sessions_list' %}" class="{% if '/sessions' in request.path %}active{% endif %}">Training Sessions</a>
     </li>
     <li>
       <a href="{% url 'dashboard:index:consent_forms_list' %}" class="{% if '/consent-forms' in request.path %}active{% endif %}">Consent Form</a>

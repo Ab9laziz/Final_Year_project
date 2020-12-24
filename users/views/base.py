@@ -15,10 +15,12 @@ def logout_user(request):
 
 
 def login_redirect(request):
-    if request.user.is_staff is False:
+    if request.user.role == 'player':
         return redirect('players:profile_update', pk=request.user.pk)
     elif request.user.role == 'admin':
         return redirect('dashboard:index:index')
+    elif request.user.role == 'trainer':
+        return redirect('trainer_dashboard:index:index')
     else:
         return redirect('index')
 

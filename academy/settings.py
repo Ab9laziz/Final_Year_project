@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'home',
     'payment',
     'portal',
+    'player_dashboard',
+    'trainer_dashboard',
     'users',
 
 ]
@@ -122,6 +124,9 @@ AUTH_USER_MODEL = 'users.UserAccount'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+LOGIN_URL = 'account_login'
+LOGIN_REDIRECT_URL = 'login_redirect'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'

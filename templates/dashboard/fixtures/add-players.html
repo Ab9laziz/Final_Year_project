@@ -1,0 +1,126 @@
+{% extends 'dashboard/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block title %}
+Add Starting 11 to Fixture
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'vendor/data-tables/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="text-center py-3" fixture-id="{{ fixture.id }}">Add Players to Fixture </h4>
+                <div class="float-right mb-2">
+                    <button class="btn btn-success btn-sm" id="addPlayers"
+                        data-url="{% url 'portal:fixtures_api:fixture_player_actions' %}">Add To Fixture</button>
+                </div>
+                <table class="table table-striped py-3" id="data_table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" name="all" id="checkall" /></th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email Address</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td><input type="checkbox" name="checkbox-element" class="cb-element"
+                                    value="{{ user.pk }}" /></td>
+                            <td>{{ user.first_name }} </td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.email }}</td>
+                            {% if user.is_active %}
+                            <td>
+                                <span class="badge badge-pill badge-success">Active</span>
+                            </td>
+                            {% else %}
+                            <td>
+                                <span class="badge badge-pill badge-danger">Inactive</span>
+                            </td>
+                            {% endif %}
+                            <td>
+                                <a href="{% url 'dashboard:players:player_details' user.pk %}">
+                                    <button class="btn btn-primary btn-sm">View</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'vendor/data-tables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/data-tables/dataTables.bootstrap4.min.js' %}"></script>
+<!--init datatable-->
+<script src="{% static 'vendor/js-init/init-datatable.js' %}"></script>
+
+<script>
+    $('#checkall').change(function () {
+        $('.cb-element').prop('checked', this.checked);
+    });
+
+    $('.cb-element').change(function () {
+        if ($('.cb-element:checked').length == $('.cb-element').length) {
+            $('#checkall').prop('checked', true);
+        }
+        else {
+            $('#checkall').prop('checked', false);
+        }
+    });
+
+    $("#addPlayers").click(function () {
+        var arrayString = [];
+        console.log(Array.isArray(arrayString));
+        $("input:checkbox[name=checkbox-element]:checked").each(function () {
+            arrayString.push($(this).val());
+            console.log(`array string is ${arrayString}`)
+        });
+
+        var arrayInt = arrayString.map(function (x) {
+            return parseInt(x, 10);
+        });
+
+        var fixtureId;
+        fixtureId = '{{ fixture.id }}'
+        let url = $(this).attr("data-url")
+        let successUrl = '{% url "dashboard:fixtures:fixture_details" fixture.pk %}'
+
+        console.log(`fixture is ${fixtureId}`);
+        console.log(`url is ${url}`)
+        console.log(`array is ${arrayInt}`)
+        $.ajax(
+            {
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                data: JSON.stringify({
+                    fixture: fixtureId,
+                    players: arrayInt
+                }),
+            }).done(function (data) {
+                window.location.replace(`${successUrl}`);
+            }).done(function(data){
+                swal({
+                    title: "Players added to Fixture",
+                    icon: "success",
+                    timer: 6000,
+                });
+            });
+    });
+</script>
+{% endblock %}

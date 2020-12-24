@@ -21,8 +21,10 @@ urlpatterns = [
     # app urls
     path('players/', include('users.urls.players', namespace='players')),
     path('lipa', lipa , name= 'lipa'),
-    path('portal/',include('portal.urls')),
+    path('',include('portal.urls', namespace='portal')),
     path('admin-dashboard/', include('dashboard.urls', namespace='dashboard')),
+    path('player-dashboard/', include('player_dashboard.urls', namespace='player_dashboard')),
+    path('trainer-dashboard/', include('trainer_dashboard.urls', namespace='trainer_dashboard')),
 
     path('admin/', admin.site.urls),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
