@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-Add Players for training
+Add Subtitute Players to Fixture
 {% endblock %}
 
 {% block styles %}
@@ -15,10 +15,10 @@ Add Players for training
     <div class="col-md-12">
         <div class="card shadow-sm">
             <div class="card-body">
-                <h4 class="text-center py-3" fixture-id="{{ fixture.id }}">Add Players to {{fixture.name}} Training Session </h4>
+                <h4 class="text-center py-3" fixture-id="{{ fixture.id }}">Add Subtitutes to Fixture </h4>
                 <div class="float-right mb-2">
                     <button class="btn btn-success btn-sm" id="addPlayers"
-                        data-url="{% url 'portal:sessions_api:session_player_actions' %}">Add To Session</button>
+                        data-url="{% url 'portal:fixtures_api:fixture_sub_actions' %}">Add To Fixture</button>
                 </div>
                 <table class="table table-striped py-3" id="data_table">
                     <thead>
@@ -85,7 +85,7 @@ Add Players for training
 
     $("#addPlayers").click(function () {
         var arrayString = [];
-        console.log(Array.isArray(arrayString));
+        console.log(arrayString);
         $("input:checkbox[name=checkbox-element]:checked").each(function () {
             arrayString.push($(this).val());
             console.log(`array string is ${arrayString}`)
@@ -98,7 +98,7 @@ Add Players for training
         var fixtureId;
         fixtureId = '{{ fixture.id }}'
         let url = $(this).attr("data-url")
-        let successUrl = '{% url "dashboard:sessions:session_add_trainers" fixture.pk %}'
+        let successUrl = '{% url "dashboard:fixtures:fixture_details" fixture.pk %}'
 
         console.log(`fixture is ${fixtureId}`);
         console.log(`url is ${url}`)
@@ -109,14 +109,14 @@ Add Players for training
                 url: url,
                 contentType: "application/json",
                 data: JSON.stringify({
-                    session: fixtureId,
+                    fixture: fixtureId,
                     players: arrayInt
                 }),
             }).done(function (data) {
                 window.location.replace(`${successUrl}`);
             }).done(function(data){
                 swal({
-                    title: "Players added to Fixture",
+                    title: "Subtitute Players added to Fixture",
                     icon: "success",
                     timer: 6000,
                 });

@@ -21,7 +21,7 @@ urlpatterns = [
     # app urls
     path('players/', include('users.urls.players', namespace='players')),
     path('lipa', lipa , name= 'lipa'),
-    path('portal/',include('portal.urls')),
+    path('',include('portal.urls', namespace='portal')),
     path('admin-dashboard/', include('dashboard.urls', namespace='dashboard')),
 
     path('admin/', admin.site.urls),

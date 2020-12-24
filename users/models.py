@@ -31,7 +31,7 @@ GENDER_CHOICES = (
 MEMBERSHIP_CHOICES = (
     ('admin', 'admin'),
     ('trainer', 'trainer'),
-    ('trainee', 'trainee'),
+    ('player', 'player'),
 )
 
 class UserAccount(AbstractUser):
@@ -40,7 +40,7 @@ class UserAccount(AbstractUser):
     last_name = models.CharField(max_length=50)
     photo = models.ImageField(upload_to='users/profile-photos/', null=True)
     phone_number = models.CharField(max_length=50, null=True, blank=True)
-    role = models.CharField(max_length=30,choices=MEMBERSHIP_CHOICES,default='trainer')
+    role = models.CharField(max_length=30,choices=MEMBERSHIP_CHOICES,default='admin')
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES, default='male')
     date_of_birth = models.DateField(null=True, blank=True)
     staff_id = models.CharField(max_length=50, null=True, blank=True)
