@@ -26,7 +26,7 @@ class TrainingSessionCreateView(DashboardView, CreateView):
 
     def get_success_url(self) -> str:
         messages.success(self.request, "Training Session Added Successfully")
-        return reverse_lazy("dashboard:sessions:session_add_players", kwargs={'pk': self.object.pk})
+        return reverse_lazy("trainer_dashboard:sessions:session_add_players", kwargs={'pk': self.object.pk})
 
 
 class TrainingSessionAddPlayersView(DashboardView, ListView):
@@ -67,6 +67,7 @@ class TrainingSessionAddTrainersView(DashboardView, ListView):
     template_name = 'dashboard/training-sessions/select-trainers.html'
 
     def get_queryset(self):
+        user = self.request.user
         return User.objects.exclude(training_sessions_assigned=self.kwargs['pk']).filter(role="trainer")
 
     def get_context_data(self, **kwargs):
@@ -96,7 +97,7 @@ class TrainingSessionEditTrainersView(DashboardView, ListView):
 class TrainingSessionUpdateView(DashboardView, UpdateView):
     model = TrainingSession
     fields = ('name', 'description', 'date', 'picture')
-    template_name = 'dashboard/training-sessions/edit.html'
+    template_name = 'trainer-dashboard/training-sessions/edit.html'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         user = self.request.user
@@ -107,16 +108,21 @@ class TrainingSessionUpdateView(DashboardView, UpdateView):
 
     def get_success_url(self) -> str:
         messages.success(self.request, "Training Session updated")
-        return reverse_lazy("dashboard:sessions:session_details", kwargs={'pk': self.object.pk})
+        return reverse_lazy("trainer_dashboard:sessions:session_details", kwargs={'pk': self.object.pk})
 
 
 class TrainingSessionListView(DashboardView, ListView):
     model = TrainingSession
-    context_object_name = 'fixtures'
-    template_name = 'dashboard/training-sessions/list.html'
+    template_name = 'trainer-dashboard/training-sessions/list.html'
 
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        context = super().get_context_data(**kwargs)
+        context["assigned_sessions"] = user.training_sessions_assigned.all().order_by("-pk")
+        context["added_sessions"] = user.training_sessions_created.all().order_by("-pk")
+        return context
 
 class TrainingSessionDetailView(DashboardView, DetailView):
     model = TrainingSession
     context_object_name = 'fixture'
-    template_name = 'dashboard/training-sessions/details.html'
+    template_name = 'trainer-dashboard/training-sessions/details.html'

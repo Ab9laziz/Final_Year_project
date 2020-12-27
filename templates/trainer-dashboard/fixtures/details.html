@@ -1,0 +1,131 @@
+{% extends 'dashboard/base.html' %} {% load static %} {% block title %} Fixture Details
+{% endblock %}
+
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 p-3 text-center">
+            <div class="py-5">
+              {% if fixture.picture %}
+              <img
+                src="{{ fixture.picture.url }}"
+                alt=" PYSA {{ fixture.name }}"
+                class="w-50"
+                style="width:50%;"
+              />
+              {% else %}
+              <img
+                src="{% static 'home/images/logo.png' %}"
+                alt="{{ fixture.name }}"
+                style="width:50%;"
+              />
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="m-3 p-3 shadow-sm">
+              <h3 class="text-center py-3">Fixture Details</h3>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <th>Name</th>
+                      <td>{{ fixture.name }}</td>
+                    </tr>
+                    <tr>
+                      <th>Description</th>
+                      <td>{{ fixture.description }}</td>
+                    </tr>
+                    <tr>
+                      <th>Players</th>
+                      <td>{{ fixture.starting_players.count }}</td>
+                    </tr>
+                    <tr>
+                      <th>Subtitutes</th>
+                      <td>{{ fixture.subtitutes.count }}</td>
+                    </tr>
+                    <tr>
+                      <th>Added</th>
+                      <td>{{ fixture.created_on }}</td>
+                    </tr>
+                    <tr>
+                      <th>Last Update</th>
+                      <td>{{ fixture.last_update }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row col-12 mt-4">
+    <div class="col-md-12  mt-4">
+        {% include 'partials/nav-pills/fixtures.html' %}
+    </div>
+    <div class="col-12">
+        <div class="row tab-content">
+            <div class="col-md-12 mb-4 tab-pane fade show active" id="pills-players" role="tabpanel"
+                aria-labelledby="pills-players-tab">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="text-center py-3">Starting 11 in fixture</h4>
+                        <table class="table table-striped py-3" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email Address</th>
+                            </thead>
+                            <tbody>
+                                {% for user in fixture.starting_players.all %}
+                                <tr>
+                                    <td>{{ user.first_name }} </td>
+                                    <td> {{ user.last_name }}</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 tab-pane fade" id="pills-subtitutes" role="tabpanel"
+                aria-labelledby="pills-subtitutes-tab">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="text-center text-capitalize py-3">Subtitute Players in This Fixture</h4>
+                        <table class="table table-striped py-3" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email Address</th>
+                                    <th>Details</th>
+                            </thead>
+                            <tbody>
+                                {% for user in fixture.subtitutes.all %}
+                                <tr>
+                                    <td>{{ user.first_name }} </td>
+                                    <td> {{ user.last_name }}</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

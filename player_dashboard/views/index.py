@@ -16,3 +16,12 @@ class DashboardView(LoginRequiredMixin, UserPassesTestMixin):
 
 class DashboardTemplateView(DashboardView, TemplateView):
     template_name = 'player-dashboard/index.html'
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        context = super().get_context_data(**kwargs)
+        context["sessions"] = user.training_sessions_playing.all().order_by(
+            "-pk")[:10]
+        context["fixtures_playing"] = user.fixtures_playing.all().order_by("-pk")[:10]
+        context["fixtures_subtituting"] = user.fixtures_subtituting.all().order_by("-pk")[:10]
+        return context

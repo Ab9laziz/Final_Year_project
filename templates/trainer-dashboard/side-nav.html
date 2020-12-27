@@ -1,17 +1,17 @@
 <nav id="sidebar">
   <div class="sidebar-header">
-    <h4>PYSA Trainers Dashboard</h4>
+    <h4>PYSA Trainers trainer_dashboard</h4>
   </div>
 
   <ul class="list-unstyled components">
     <li>
-      <a href="{% url 'dashboard:players:players_list' %}" class="{% if '/players' in request.path %}active{% endif %}">Players</a>
+      <a href="{% url 'trainer_dashboard:index:index' %}" class="{% if '/dashboard' in request.path %}active{% endif %}">Dashboard</a>
     </li>
     <li>
-      <a href="{% url 'dashboard:fixtures:fixtures_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
+      <a href="{% url 'trainer_dashboard:fixtures:fixtures_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
     </li>
     <li>
-      <a href="{% url 'dashboard:sessions:sessions_list' %}" class="{% if '/sessions' in request.path %}active{% endif %}">Training Sessions</a>
+      <a href="{% url 'trainer_dashboard:sessions:sessions_list' %}" class="{% if '/sessions' in request.path %}active{% endif %}">Training Sessions</a>
     </li>
   </ul>
 </nav>
