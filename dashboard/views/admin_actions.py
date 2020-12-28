@@ -1,9 +1,10 @@
-from django.contrib import messages
-from django.contrib.auth import get_user_model
+from django.contrib import auth, messages
 from django.shortcuts import get_object_or_404, redirect
 from portal.models import Fixture, TrainingSession
+
 from ..utils import send_activation_email, send_suspension_email
-User = get_user_model()
+
+User = auth.get_user_model()
 
 # logic for suspending users and redirection based on user type
 

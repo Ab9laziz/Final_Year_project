@@ -17,4 +17,113 @@
     </div>
 </nav>
 
+
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="text-center py-3">Upcoming Training Sessions</h4>
+                <table class="table table-striped py-3" id="data_table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Players</th>
+                            <th>Trainers</th>
+                            <th>Added</th>
+                            <th>Last Update</th>
+                    </thead>
+                    <tbody>
+                        {% for session in sessions %}
+                        <tr>
+                            <td> {{ session.name }}</td>
+                            <td> {{ session.description }}</td>
+                            <td> {{ session.date }}</td>
+                            <td> {{ session.players.count }}</td>
+                            <td> {{ session.trainers.count }}</td>
+                            <td> {{ session.created_on }}</td>
+                            <td> {{ session.last_update }}</td>
+                            <td>
+                                <a href="{% url 'dashboard:sessions:session_details' session.pk %}">
+                                    <button class="btn btn-primary btn-sm">View</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="text-center py-3">Upcoming Fixtures (In Starting 11)</h4>
+                <table class="table table-striped py-3" id="data_table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Added</th>
+                    </thead>
+                    <tbody>
+                        {% for fixture in fixtures_playing %}
+                        <tr>
+                            <td> {{ fixture.name }}</td>
+                            <td> {{ fixture.description }}</td>
+                            <td> {{ fixture.date }}</td>
+                            <td> {{ fixture.created_on }}</td>
+                            <td>
+                                <a href="{% url 'dashboard:fixtures:fixture_details' fixture.pk %}">
+                                    <button class="btn btn-primary btn-sm">View</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="text-center py-3">Upcoming Fixtures Subtituting</h4>
+                <table class="table table-striped py-3" id="data_table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Added</th>
+                    </thead>
+                    <tbody>
+                        {% for fixture in fixtures_subtituting %}
+                        <tr>
+                            <td> {{ fixture.name }}</td>
+                            <td> {{ fixture.description }}</td>
+                            <td> {{ fixture.date }}</td>
+                            <td> {{ fixture.created_on }}</td>
+                            <td>
+                                <a href="{% url 'dashboard:fixtures:fixture_details' fixture.pk %}">
+                                    <button class="btn btn-primary btn-sm">View</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}

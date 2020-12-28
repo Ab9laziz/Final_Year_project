@@ -33,6 +33,8 @@ INSTALLED_APPS = [
      # 3rd party libs
     'allauth',
     'allauth.account',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
     'widget_tweaks',
 
     # internal apps
@@ -86,6 +88,7 @@ DATABASES = {
         'NAME': config('DB_NAME'),
       }
 }
+
 
 
 # Password validation
@@ -161,4 +164,8 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'success',
     messages.WARNING: 'warning',
     messages.ERROR: 'danger',
+}
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
 }

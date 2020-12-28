@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 from portal.models import Fixture
-
+from portal.forms import FixtureForm
 from .index import DashboardView
 from django.contrib.auth import get_user_model
 
@@ -14,7 +14,7 @@ User = get_user_model()
 
 class FixtureCreateView(DashboardView, CreateView):
     model = Fixture
-    fields = ('name', 'description', 'date', 'picture')
+    form_class = FixtureForm
     template_name = 'dashboard/fixtures/add.html'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:

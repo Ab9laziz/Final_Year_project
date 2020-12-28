@@ -44,7 +44,7 @@ class TrainingSession(CommonInfo):
     players = models.ManyToManyField(
         User, related_name='training_sessions_playing', limit_choices_to={'role': 'player'})
     trainers = models.ManyToManyField(
-        User, related_name='training_sesssions_assigned', limit_choices_to={'role': 'trainer'})
+        User, related_name='training_sessions_assigned', limit_choices_to={'role': 'trainer'})
     added_by = models.ForeignKey(
         User, related_name='training_sessions_created', on_delete=models.CASCADE)
     updated_by = models.ForeignKey(
