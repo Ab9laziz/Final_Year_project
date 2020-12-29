@@ -1,6 +1,6 @@
 <nav id="sidebar">
   <div class="sidebar-header">
-    <h4>PYSA Trainers trainer_dashboard</h4>
+    <h4>PYSA Trainers Trainer Dashboard</h4>
   </div>
 
   <ul class="list-unstyled components">
@@ -12,6 +12,9 @@
     </li>
     <li>
       <a href="{% url 'trainer_dashboard:sessions:sessions_list' %}" class="{% if '/sessions' in request.path %}active{% endif %}">Training Sessions</a>
+    </li>
+    <li>
+      <a href="{% url 'trainer_dashboard:sessions:sessions_list' %}" class="{% if '/profile' in request.path %}active{% endif %}">My Profile</a>
     </li>
   </ul>
 </nav>

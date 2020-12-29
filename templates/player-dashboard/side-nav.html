@@ -5,16 +5,19 @@
 
   <ul class="list-unstyled components">
     <li>
-      <a href="{% url 'dashboard:fixtures:fixtures_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
+      <a href="{% url 'player_dashboard:index:index' %}" class="{% if '/' in request.path %}active{% endif %}">Dashboard</a>
     </li>
     <li>
-      <a href="{% url 'dashboard:sessions:sessions_list' %}" class="{% if '/sessions' in request.path %}active{% endif %}">Training Sessions</a>
+      <a href="{% url 'player_dashboard:fixtures:fixtures_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
+    </li>
+    <li>
+      <a href="{% url 'player_dashboard:sessions:sessions_list' %}" class="{% if '/sessions' in request.path %}active{% endif %}">Training Sessions</a>
     </li>
      <li>
       <a href="#">Fee Payment</a>
     </li>
     <li>
-      <a href="{% url 'dashboard:index:consent_forms_list' %}" class="{% if '/profile' in request.path %}active{% endif %}">My Profile</a>
+      <a href="" class="{% if '/profile' in request.path %}active{% endif %}">My Profile</a>
     </li>
   </ul>
 </nav>
