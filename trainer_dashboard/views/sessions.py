@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 from portal.models import TrainingSession
-
+from portal.forms import TrainingSessionForm
 from .index import DashboardView
 from django.contrib.auth import get_user_model
 
@@ -14,7 +14,7 @@ User = get_user_model()
 
 class TrainingSessionCreateView(DashboardView, CreateView):
     model = TrainingSession
-    fields = ('name', 'description', 'date', 'picture')
+    form_class = TrainingSessionForm
     template_name = 'dashboard/training-sessions/add.html'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
@@ -96,7 +96,7 @@ class TrainingSessionEditTrainersView(DashboardView, ListView):
 
 class TrainingSessionUpdateView(DashboardView, UpdateView):
     model = TrainingSession
-    fields = ('name', 'description', 'date', 'picture')
+    form_class = TrainingSessionForm
     template_name = 'trainer-dashboard/training-sessions/edit.html'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:

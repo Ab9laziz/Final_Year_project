@@ -5,6 +5,9 @@
 
   <ul class="list-unstyled components">
     <li>
+      <a href="{% url 'dashboard:index:index' %}" class="{% if '/admin-dashboard' in request.path %}active{% endif %}">Dashboard</a>
+    </li>
+    <li>
       <a href="{% url 'dashboard:players:players_list' %}" class="{% if '/players' in request.path %}active{% endif %}">Players</a>
     </li>
     <li>

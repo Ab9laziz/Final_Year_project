@@ -28,17 +28,17 @@
                             <th>Last Update</th>
                         </thead>
                         <tbody>
-                        {% for fixture in fixtures %}
+                        {% for session in playing_sessions %}
                             <tr>
-                                <td> {{ fixture.name }}</td>
-                                <td> {{ fixture.description }}</td>
-                                <td> {{ fixture.date }}</td>
-                                <td> {{ fixture.players.count }}</td>
-                                <td> {{ fixture.trainers.count }}</td>
-                                <td> {{ fixture.created_on }}</td>
-                                <td> {{ fixture.last_update }}</td>
+                                <td> {{ session.name }}</td>
+                                <td> {{ session.description }}</td>
+                                <td> {{ session.date }}</td>
+                                <td> {{ session.players.count }}</td>
+                                <td> {{ session.trainers.count }}</td>
+                                <td> {{ session.created_on }}</td>
+                                <td> {{ session.last_update }}</td>
                                 <td>
-                                    <a href="{% url 'dashboard:sessions:session_details' fixture.pk %}">
+                                    <a href="{% url 'player_dashboard:sessions:session_details' session.pk %}">
                                         <button class="btn btn-primary btn-sm">View</button>
                                     </a>
                                 </td>

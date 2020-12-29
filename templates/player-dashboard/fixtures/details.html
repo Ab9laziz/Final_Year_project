@@ -84,8 +84,6 @@
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email Address</th>
-                                    <th>Action</th>
-                                    <th>Details</th>
                             </thead>
                             <tbody>
                                 {% for user in fixture.starting_players.all %}
@@ -105,11 +103,6 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h4 class="text-center text-capitalize py-3">Subtitute Players in This Fixture</h4>
-                  <div class="float-right mb-2">
-                            <a href="{% url 'dashboard:fixtures:fixture_edit_subs' pk=fixture.pk %}">
-                                <button class="btn btn-primary btn-sm">Add New Subtitute</button>
-                            </a>
-                        </div> 
                         <table class="table table-striped py-3" id="data-table">
                             <thead>
                                 <tr>
