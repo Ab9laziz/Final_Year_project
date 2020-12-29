@@ -20,6 +20,7 @@ urlpatterns = [
 
     # app urls
     path('players/', include('users.urls.players', namespace='players')),
+    path('users/', include('users.urls.users', namespace='users')),
     path('lipa', lipa , name= 'lipa'),
     path('',include('portal.urls', namespace='portal')),
     path('admin-dashboard/', include('dashboard.urls', namespace='dashboard')),

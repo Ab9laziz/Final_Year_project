@@ -35,7 +35,7 @@ class TrainingSessionAddPlayersView(DashboardView, ListView):
     template_name = 'dashboard/training-sessions/select-players.html'
 
     def get_queryset(self):
-        return User.objects.exclude(training_sessions_playing=self.kwargs['pk']).filter(role="player")
+        return User.objects.exclude(training_sessions_playing=self.kwargs['pk']).filter(role="player", is_active=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -52,7 +52,7 @@ class TrainingSessionEditPlayersView(DashboardView, ListView):
     template_name = 'dashboard/training-sessions/add-players.html'
 
     def get_queryset(self):
-        return User.objects.exclude(training_sessions_playing=self.kwargs['pk']).filter(role="player")
+        return User.objects.exclude(training_sessions_playing=self.kwargs['pk']).filter(role="player", is_active=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -67,7 +67,7 @@ class TrainingSessionAddTrainersView(DashboardView, ListView):
     template_name = 'dashboard/training-sessions/select-trainers.html'
 
     def get_queryset(self):
-        return User.objects.exclude(training_sessions_assigned=self.kwargs['pk']).filter(role="trainer")
+        return User.objects.exclude(training_sessions_assigned=self.kwargs['pk']).filter(role="trainer", is_active=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -84,7 +84,7 @@ class TrainingSessionEditTrainersView(DashboardView, ListView):
     template_name = 'dashboard/training-sessions/add-trainers.html'
 
     def get_queryset(self):
-        return User.objects.exclude(training_sessions_assigned=self.kwargs['pk']).filter(role="trainer")
+        return User.objects.exclude(training_sessions_assigned=self.kwargs['pk']).filter(role="trainer", is_active=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

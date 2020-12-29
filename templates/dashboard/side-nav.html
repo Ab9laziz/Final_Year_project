@@ -26,5 +26,8 @@
     <li>
       <a href="{% url 'dashboard:index:consent_forms_list' %}" class="{% if '/consent-forms' in request.path %}active{% endif %}">Consent Form</a>
     </li>
+    <li>
+      <a href="{% url 'users:user_profile' %}" class="{% if '/consent-forms' in request.path %}active{% endif %}">My Profile</a>
+    </li>
   </ul>
 </nav>

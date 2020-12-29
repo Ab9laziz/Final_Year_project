@@ -98,11 +98,13 @@ Add Players for training
         var fixtureId;
         fixtureId = '{{ fixture.id }}'
         let url = $(this).attr("data-url")
-        let successUrl = '{% url "dashboard:sessions:session_details" fixture.pk %}'
 
-        console.log(`fixture is ${fixtureId}`);
-        console.log(`url is ${url}`)
-        console.log(`array is ${arrayInt}`)
+        userRole = '{{request.user.role}}'
+        if (userRole == 'admin') {
+            let successUrl = '{% url "dashboard:sessions:session_details" fixture.pk %}'
+        } else if(userRole == 'trainer') {
+            let successUrl = '{% url "trainer_dashboard:sessions:session_details" fixture.pk %}'
+        }
         $.ajax(
             {
                 type: "POST",

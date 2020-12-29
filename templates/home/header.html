@@ -64,8 +64,14 @@
             ><span class="glyphicon glyphicon-user"></span>&nbsp; {{ request.user.get_full_name }} <span class="caret"></span
           ></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Portal</a></li>
-            <li><a href="#">My Profile</a></li>
+            {% if request.user.role == 'admin' %}
+            <li><a href="{% url 'dashboard:index:index' %}">Dashboard</a></li>
+            {% elif request.user.role == 'trainer' %}
+            <li><a href="{% url 'trainer_dashboard:index:index' %}">Portal</a></li>
+            {% elif request.user.role == 'player' %}
+            <li><a href="{% url 'player_dashboard:index:index' %}">Portal</a></li>
+            {% endif %}
+            <li><a href="{% url 'users:user_profile' %}">My Profile</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
           </ul>
         </li>

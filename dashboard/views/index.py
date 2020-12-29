@@ -4,7 +4,7 @@ from django.db.models.base import Model
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DetailView, ListView,
                                   TemplateView, UpdateView)
-from portal.models import ConsentForm
+from portal.models import ConsentForm, TrainingSession, Fixture
 
 User = get_user_model()
 
@@ -19,6 +19,15 @@ class DashboardView(LoginRequiredMixin, UserPassesTestMixin):
 
 class DashboardTemplateView(DashboardView, TemplateView):
     template_name = 'dashboard/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["recent_sessions"] = TrainingSession.objects.all().order_by('-created_on')[:5]
+        context["recent_fixtures"] = Fixture.objects.all().order_by('-created_on')[:5]
+        context["recent_players"] = User.objects.filter(role='player').order_by('-date_joined')[:5]
+        context["recent_trainers"] = User.objects.filter(role='trainer').order_by('-date_joined')[:5]
+        return context
+    
 
 
 class UserConfirmSuspendView(DashboardView, DetailView):
