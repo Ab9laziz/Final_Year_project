@@ -30,6 +30,7 @@ class LoginUserView(LoginView):
     def get_success_url(self):
         return reverse_lazy('login_redirect')
 
+
 def register_redirect(request):
     if request.user.role == 'player':
         return redirect('players:profile_update', pk=request.user.pk)

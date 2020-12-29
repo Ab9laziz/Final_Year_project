@@ -12,7 +12,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-12">
             <div class="card shadow-sm">
                     <table class="table table-striped py-3" id="data_table">
                         <thead>
@@ -34,7 +34,7 @@
                                 <td> {{ fixture.created_on }}</td>
                                 <td> {{ fixture.last_update }}</td>
                                 <td>
-                                    <a href="{% url 'dashboard:fixtures:fixture_details' fixture.pk %}">
+                                    <a href="{% url 'player_dashboard:fixtures:fixture_details' fixture.pk %}">
                                         <button class="btn btn-primary btn-sm">View</button>
                                     </a>
                                 </td>
