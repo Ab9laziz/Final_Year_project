@@ -20,7 +20,7 @@ def logout_user(request):
 
 def login_redirect(request):
     if request.user.role == 'player':
-        return redirect('players_dashboard:index:index')
+        return redirect('player_dashboard:index:index')
     elif request.user.role == 'admin':
         return redirect('dashboard:index:index')
     elif request.user.role == 'trainer':
