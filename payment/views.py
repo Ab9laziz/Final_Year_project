@@ -13,9 +13,10 @@ def lipa(request):
         if form.is_valid():
             amount = form.cleaned_data.get('amount')
             phone_number = form.cleaned_data.get('phone_number')
+            user = request.user
             remit = index(phone_number, amount)
             # print (remit.response)
-            print(phone_number, amount)
+            print(phone_number, amount, user)
             return redirect('lipa')
     else:
         form = paymentForm(None)
