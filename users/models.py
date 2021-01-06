@@ -34,17 +34,26 @@ MEMBERSHIP_CHOICES = (
     ('player', 'player'),
 )
 
+GROUP_CHOICES = [
+    ('u9', 'Under 9'),
+    ('u12', 'Under 12'),
+    ('u15', 'Under 15'),
+    ('u18', 'Under 18'),
+    ('u21', 'Under 21'),
+]
+
 class UserAccount(AbstractUser):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    photo = models.ImageField(upload_to='users/profile-photos/', null=True)
+    photo = models.ImageField(upload_to='users/profile-photos/', null=True, blank=True)
     phone_number = models.CharField(max_length=50, null=True, blank=True)
     role = models.CharField(max_length=30,choices=MEMBERSHIP_CHOICES,default='admin')
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES, default='male')
     date_of_birth = models.DateField(null=True, blank=True)
     staff_id = models.CharField(max_length=50, null=True, blank=True)
     id_no = models.PositiveIntegerField(null=True, blank=True)
+    group = models.CharField(max_length=30, choices=GROUP_CHOICES, default='u18')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name',]

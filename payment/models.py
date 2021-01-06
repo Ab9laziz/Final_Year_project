@@ -3,6 +3,7 @@ from django.db import models
 from home.models import CommonInfo
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import JsonResponse
 User = get_user_model()
 # Create your models here.
 class FeeSetting(CommonInfo):
@@ -14,9 +15,11 @@ class FeeSetting(CommonInfo):
 
 class PaymentManager(models.Manager):
     # saving the processed  payment to db
-    def save_api_response(self, request, user=None):
-        mpesa_body = request.decode('utf-8')
+    def save_api_response(self, response, user):
+        mpesa_body = response.body.decode('utf-8')
         mpesa_payment = json.loads(mpesa_body)
+        # mpesa_payment = response.json()
+        print(f"mpesa payment {mpesa_payment}")
 
         payment = self.create(
             first_name = mpesa_payment['FirstName'],
@@ -28,37 +31,29 @@ class PaymentManager(models.Manager):
             reference=mpesa_payment['BillRefNumber'],
             organization_balance=mpesa_payment['OrgAccountBalance'],
             transaction_type=mpesa_payment['TransactionType'],
+            user = user
         )
-        if user:
-            payment.user = request.user
-            payment.save()
-            payment.refresh_from_db()
-        return payment
+        payment.save()
+        context = {
+            "ResultCode": 0,
+            "ResultDesc": "Accepted"
+        }
+        return JsonResponse(dict(context))
 
 class MpesaPayment(CommonInfo):
-    amount = models.DecimalField(max_digits=10,decimal_places=2)
-    description = models.TextField()
-    payment_type = models.TextField()
-    reference = models.TextField()
+    amount = models.PositiveIntegerField()
+    description = models.TextField(null=True)
+    payment_type = models.TextField(null=True)
+    reference = models.TextField(null=True)
     first_name = models.CharField(max_length=100)
-    middle_name = models.CharField(max_length=100)
+    middle_name = models.CharField(max_length=100, null=True)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=13)
-    organization_balance = models.DecimalField(max_digits=10,decimal_places=2)
+    organization_balance = models.DecimalField(max_digits=10,decimal_places=2, null=True)
     balance = models.DecimalField(max_digits=10, decimal_places=2)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='payments')
 
-    objects = PaymentManager()
+    # objects = PaymentManager()
 
     def __str__(self):
         return f" {self.first_name} {self.amount}"
-
-    def save(self, *args, **kwargs):
-
-        try:
-            qs = FeeSetting.objects.last()
-        except:
-            raise ObjectDoesNotExist("The query set does not exist")
-
-        self.balance = qs.amount - self.amount
-        super().save(*args, *kwargs)

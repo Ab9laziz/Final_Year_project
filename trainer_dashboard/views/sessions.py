@@ -35,7 +35,8 @@ class TrainingSessionAddPlayersView(DashboardView, ListView):
     template_name = 'dashboard/training-sessions/select-players.html'
 
     def get_queryset(self):
-        return User.objects.exclude(training_sessions_playing=self.kwargs['pk'], is_active=False).filter(role="player")
+        user = self.request.user
+        return User.objects.exclude(training_sessions_playing=self.kwargs['pk'], is_active=False).filter(role="player", group=user.group)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -52,7 +53,8 @@ class TrainingSessionEditPlayersView(DashboardView, ListView):
     template_name = 'dashboard/training-sessions/add-players.html'
 
     def get_queryset(self):
-        return User.objects.exclude(training_sessions_playing=self.kwargs['pk']).filter(role="player", is_active=True)
+        user = self.request.user
+        return User.objects.exclude(training_sessions_playing=self.kwargs['pk']).filter(role="player", is_active=True, group=user.group)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -68,7 +70,7 @@ class TrainingSessionAddTrainersView(DashboardView, ListView):
 
     def get_queryset(self):
         user = self.request.user
-        return User.objects.exclude(training_sessions_assigned=self.kwargs['pk']).filter(role="trainer", is_active=True)
+        return User.objects.exclude(training_sessions_assigned=self.kwargs['pk']).filter(role="trainer", is_active=True, group=user.group)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -85,7 +87,8 @@ class TrainingSessionEditTrainersView(DashboardView, ListView):
     template_name = 'dashboard/training-sessions/add-trainers.html'
 
     def get_queryset(self):
-        return User.objects.exclude(training_sessions_assigned=self.kwargs['pk']).filter(role="trainer", is_active=True)
+        user = self.request.user
+        return User.objects.exclude(training_sessions_assigned=self.kwargs['pk']).filter(role="trainer", is_active=True, group=user.group)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -118,9 +121,12 @@ class TrainingSessionListView(DashboardView, ListView):
     def get_context_data(self, **kwargs):
         user = self.request.user
         context = super().get_context_data(**kwargs)
-        context["assigned_sessions"] = user.training_sessions_assigned.all().order_by("-pk")
-        context["added_sessions"] = user.training_sessions_created.all().order_by("-pk")
+        context["assigned_sessions"] = user.training_sessions_assigned.all().order_by(
+            "-pk")
+        context["added_sessions"] = user.training_sessions_created.all().order_by(
+            "-pk")
         return context
+
 
 class TrainingSessionDetailView(DashboardView, DetailView):
     model = TrainingSession
