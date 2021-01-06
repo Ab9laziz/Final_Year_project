@@ -24,6 +24,13 @@
       <a href="{% url 'dashboard:sessions:sessions_list' %}" class="{% if '/sessions' in request.path %}active{% endif %}">Training Sessions</a>
     </li>
     <li>
+      <a href="{% url 'dashboard:payments:fee_settings_list' %}" class="{% if '/payments/fee-settings/' in request.path %}active{% endif %}">Fee Setting</a>
+    </li>
+    <li>
+      <a href="{% url 'dashboard:payments:payments_list' %}" class="{% if '/payments/' in request.path %}active{% endif %}">Payments</a>
+    </li>
+    
+    <li>
       <a href="{% url 'dashboard:index:consent_forms_list' %}" class="{% if '/consent-forms' in request.path %}active{% endif %}">Consent Form</a>
     </li>
     <li>

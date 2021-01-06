@@ -15,7 +15,7 @@ class PlayerSignUpForm(UserCreationForm):
     # gender = forms.CharField(widget=forms.CharField(attrs={'placeholder':'Enter Your Gender'}))
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'gender', 'email', 'phone_number', 'date_of_birth', )
+        fields = ('first_name', 'last_name', 'gender', 'email', 'phone_number', 'date_of_birth', 'group', )
 
         widgets = {
             'date_of_birth': DatePickerInput()

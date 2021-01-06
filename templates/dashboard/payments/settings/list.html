@@ -1,0 +1,59 @@
+{% extends 'dashboard/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block title %}
+    Fee Settings
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="text-center py-3">All Fee Settings</h4>
+                    {% if settings.count == 0 %}
+                    <div class="d-flex justify-content-end mb-2">
+                    <a href="{% url 'dashboard:payments:fee_setting_add' %}">
+                        <button class="btn btn-primary btn-sm">Add New Fee Settings</button>
+                    </a>
+                </div>
+                {% endif %}
+                    <table class="table table-striped py-3" id="data_table">
+                        <thead>
+                        <tr>
+                            <th>Amount (Ksh)</th>
+                            <th>Added</th>
+                            <th>Last Update</th>
+                        </thead>
+                        <tbody>
+                        {% for setting in settings %}
+                            <tr>
+                                <td> {{ setting.amount }}</td>
+                                <td> {{ setting.created_at }}</td>
+                                <td> {{ setting.last_update }}</td>
+                                <td>
+                                    <a href="{% url 'dashboard:payments:fee_setting_edit' setting.pk %}">
+                                        <button class="btn btn-primary btn-sm">Edit</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'dashboard/data-tables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.js' %}"></script>
+    <!--init datatable-->
+    <script src="{% static 'dashboard/data-tables/init-datatable.js' %}"></script>
+{% endblock %}

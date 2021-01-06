@@ -64,6 +64,10 @@
                       <td>{{ user.gender }}</td>
                     </tr>
                     <tr>
+                      <th>Group</th>
+                      <td>{{ user.get_group_display }}</td>
+                    </tr>
+                    <tr>
                       <th>Status</th>
                       <td>
                         {% if user.is_active %}

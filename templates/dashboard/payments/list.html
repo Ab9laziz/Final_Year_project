@@ -1,0 +1,56 @@
+{% extends 'dashboard/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block title %}
+    All Fee Payments
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="text-center py-3">All Fee Payments</h4>
+                    <table class="table table-striped py-3" id="data_table">
+                        <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Amount</th>
+                            <th>Balance</th>
+                            <th>Added</th>
+                            <th>Last Update</th>
+                        </thead>
+                        <tbody>
+                        {% for payment in payments %}
+                            <tr>
+                                <td> {{ payment.user.get_full_name }}</td>
+                                <td> {{ payment.amount }}</td>
+                                <td> {{ payment.balance }}</td>
+                                <td> {{ payment.created_at }}</td>
+                                <td> {{ payment.last_update }}</td>
+                                <td>
+                                    <a href="{% url 'dashboard:payments:payment_details' payment.pk %}">
+                                        <button class="btn btn-primary btn-sm">View</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'dashboard/data-tables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.js' %}"></script>
+    <!--init datatable-->
+    <script src="{% static 'dashboard/data-tables/init-datatable.js' %}"></script>
+{% endblock %}

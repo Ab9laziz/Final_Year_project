@@ -15,7 +15,7 @@ class TrainerCreateView(DashboardView, CreateView):
     model = User
     template_name = 'dashboard/users/trainers/add.html'
     fields = ('first_name', 'last_name', 'email',
-              'phone_number', 'gender', 'id_no', 'staff_id', )
+              'phone_number', 'gender', 'group' ,'id_no', 'staff_id', )
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         random_password = get_random_string()
