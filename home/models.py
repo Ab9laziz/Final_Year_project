@@ -8,3 +8,11 @@ class CommonInfo(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Blog(CommonInfo):
+    title = models.CharField(max_length=254)
+    description = models.TextField()
+
+    def __str__(self) -> str:
+        return self.title
