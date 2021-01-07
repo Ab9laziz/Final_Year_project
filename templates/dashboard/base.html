@@ -10,7 +10,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <link rel="icon" type="image/png" href="{% static '\home\images\logobg.jpg' %}">
-    <title>{% block title %}Admin Dashboard{% endblock %} | PYSA </title>
+
+    <title>{% block title %}
+    {% if request.user.role == 'admin' %}
+    Admin Dashboard
+    {% elif request.user.role == 'player' %}
+    Player Dashboard
+    {% elif request.user.role == 'trainer' %}
+    Trainer Dashboard
+      {% endif %}
+    {% endblock %} | PYSA </title>
 
 
     <!-- Loads all static files -->

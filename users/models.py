@@ -47,7 +47,7 @@ class UserAccount(AbstractUser):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     photo = models.ImageField(upload_to='users/profile-photos/', null=True, blank=True)
-    phone_number = models.CharField(max_length=50, null=True, blank=True)
+    phone_number = models.CharField(max_length=50, null=True, blank=True, verbose_name='Phone Number')
     role = models.CharField(max_length=30,choices=MEMBERSHIP_CHOICES,default='admin')
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES, default='male')
     date_of_birth = models.DateField(null=True, blank=True)

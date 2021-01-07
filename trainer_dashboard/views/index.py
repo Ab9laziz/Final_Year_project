@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import Group
 
 from django.views.generic import TemplateView
 from portal.models import TrainingSession, Fixture
@@ -24,4 +25,5 @@ class DashboardTemplateView(DashboardView, TemplateView):
         context["assigned_sessions"] = user.training_sessions_assigned.all().order_by("-pk")[:10]
         context["added_sessions"] = user.training_sessions_created.all().order_by("-pk")[:10]
         context["fixtures"] = Fixture.objects.all().order_by("-pk")[:10]
+        context["recent_players"] = User.objects.filter(group=user.group)[:5]
         return context
