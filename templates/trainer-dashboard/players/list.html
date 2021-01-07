@@ -1,0 +1,65 @@
+{% extends 'dashboard/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block title %}
+    All Players
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="text-center py-3">All Players</h4>
+                    <table class="table table-striped py-3" id="data_table">
+                        <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Contact</th>
+                            <th>Email Address</th>
+                            <th>Group</th>
+                            <th>Added</th>
+                            <th>Last Login</th>
+                            <th>Status</th>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.first_name }} </td>
+                                <td> {{ user.last_name }}</td>
+                                <td> {{ user.phone_number }}</td>
+                                <td>{{ user.email }}</td> 
+                                <td>{{ user.get_group_display }}</td> 
+                                <td> {{ user.date_joined }}</td>
+                                <td> {{ user.last_login }}</td>
+                                {% if user.is_active %}
+                                    <td>
+                                        <span class="badge badge-pill badge-success">Active</span>
+                                    </td>
+                                {% else %}
+                                    <td>
+                                        <span class="badge badge-pill badge-danger">Inactive</span>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'dashboard/data-tables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.js' %}"></script>
+    <!--init datatable-->
+    <script src="{% static 'dashboard/data-tables/init-datatable.js' %}"></script>
+{% endblock %}

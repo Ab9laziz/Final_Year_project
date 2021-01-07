@@ -25,7 +25,7 @@ class FixtureCreateView(DashboardView, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self) -> str:
-        messages.success(self.request, "Fixtured Added Successfully")
+        messages.success(self.request, "Fixture Added Successfully")
         return reverse_lazy("dashboard:fixtures:fixture_add_players", kwargs={'pk': self.object.pk})
 
 

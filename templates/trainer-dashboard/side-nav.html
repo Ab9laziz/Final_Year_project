@@ -8,6 +8,9 @@
       <a href="{% url 'trainer_dashboard:index:index' %}" class="{% if '/dashboard' in request.path %}active{% endif %}">Dashboard</a>
     </li>
     <li>
+      <a href="{% url 'trainer_dashboard:players:players_list' %}" class="{% if '/players' in request.path %}active{% endif %}">Players</a>
+    </li>
+    <li>
       <a href="{% url 'trainer_dashboard:fixtures:fixtures_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
     </li>
     <li>
