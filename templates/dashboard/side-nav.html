@@ -13,10 +13,6 @@
     <li>
       <a href="{% url 'dashboard:trainers:trainers_list' %}" class="{% if '/trainers' in request.path %}active{% endif %}">Trainers</a>
     </li>
-
-    <li>
-      <a href="#">Fee Payment</a>
-    </li>
     <li>
       <a href="{% url 'dashboard:fixtures:fixtures_list' %}" class="{% if '/fixtures' in request.path %}active{% endif %}">Fixtures</a>
     </li>
@@ -29,7 +25,7 @@
     <li>
       <a href="{% url 'dashboard:payments:payments_list' %}" class="{% if '/payments/' in request.path %}active{% endif %}">Payments</a>
     </li>
-    
+
     <li>
       <a href="{% url 'dashboard:index:consent_forms_list' %}" class="{% if '/consent-forms' in request.path %}active{% endif %}">Consent Form</a>
     </li>
