@@ -16,6 +16,11 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h4 class="text-center py-3">All Fixtures</h4>
+                    <div class="d-flex justify-content-end mb-2">
+                    <a href="{% url 'trainer_dashboard:fixtures:fixture_add' %}">
+                        <button class="btn btn-primary btn-sm">Add New Fixture</button>
+                    </a>
+                </div>
                     <table class="table table-striped py-3" id="data_table">
                         <thead>
                         <tr>
