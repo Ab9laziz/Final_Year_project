@@ -29,7 +29,7 @@ class FixtureCreateView(DashboardView, CreateView):
         return reverse_lazy("dashboard:fixtures:fixture_add_players", kwargs={'pk': self.object.pk})
 
 
-class FixtureAddPlayersView(DashboardView, ListView):
+class FixtureAddPlayersView(ListView):
     model = User
     context_object_name = 'users'
     template_name = 'dashboard/fixtures/select-players.html'
@@ -46,7 +46,7 @@ class FixtureAddPlayersView(DashboardView, ListView):
 # add players to an existing fixture
 
 
-class FixtureEditPlayersView(DashboardView, ListView):
+class FixtureEditPlayersView(ListView):
     model = User
     context_object_name = 'users'
     template_name = 'dashboard/fixtures/add-players.html'
@@ -61,7 +61,7 @@ class FixtureEditPlayersView(DashboardView, ListView):
         return context
 
 
-class FixtureAddSubtitutesView(DashboardView, ListView):
+class FixtureAddSubtitutesView(ListView):
     model = User
     context_object_name = 'users'
     template_name = 'dashboard/fixtures/select-subtitutes.html'
@@ -78,7 +78,7 @@ class FixtureAddSubtitutesView(DashboardView, ListView):
 # add subtitutes to an existing fixture
 
 
-class FixtureEditSubtitutesView(DashboardView, ListView):
+class FixtureEditSubtitutesView(ListView):
     model = User
     context_object_name = 'users'
     template_name = 'dashboard/fixtures/add-subtitutes.html'
@@ -93,7 +93,7 @@ class FixtureEditSubtitutesView(DashboardView, ListView):
         return context
 
 
-class FixtureUpdateView(DashboardView, UpdateView):
+class FixtureUpdateView (UpdateView):
     model = Fixture
     fields = ('name', 'description', 'date', 'picture')
     template_name = 'dashboard/fixtures/edit.html'
