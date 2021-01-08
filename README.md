@@ -12,10 +12,7 @@ Football Academy management System
 
 1. Clone the repository.
 2. Change directory to the location of this repository.
-3. Create a `.env` file using the included `.env.example` as an example.
-4. Generate a secret key for your app and paste into the SECRET_KEY section of .env file
-you can find generate the key from [here](https://djecrety.ir/)
-5. Create and start your preferred Python virtual environment. For
+3.Create and start your preferred Python virtual environment. For
 more information on how to set up a virtual environment, check the instructions on [this link](https://tutorial.djangogirls.org/en/django_installation/). Install the required libraries by running the commands below, by changing to
 the project directory.
 
