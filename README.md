@@ -35,7 +35,7 @@ Install the required libraries by running the command below
 To run locally:
 
     python manage.py runserver
-To see player functionalities, register from the dashboard of the landing page.
-Activate the player as the admin to be able to login
-To view the trainer dashboard,create a trainer from the admin dashboard
-To view the m-pesa fee payment use the url-http://127.0.0.1:8000/lipa
+-To see player functionalities, register from the dashboard of the landing page.
+-Activate the player as the admin to be able to login
+-To view the trainer dashboard,create a trainer from the admin dashboard
+-To view the m-pesa fee payment use the url-http://127.0.0.1:8000/lipa
