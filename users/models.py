@@ -54,6 +54,7 @@ class UserAccount(AbstractUser):
     staff_id = models.CharField(max_length=50, null=True, blank=True)
     id_no = models.PositiveIntegerField(null=True, blank=True)
     group = models.CharField(max_length=30, choices=GROUP_CHOICES, default='u18')
+    fee_balance = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name',]

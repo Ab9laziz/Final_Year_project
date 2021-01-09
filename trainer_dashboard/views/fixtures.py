@@ -36,7 +36,7 @@ class FixtureAddPlayersView(DashboardView, ListView):
     template_name = 'dashboard/fixtures/select-players.html'
 
     def get_queryset(self):
-        return User.objects.exclude(fixtures_playing=self.kwargs['pk']).filter(role="player", is_active=True)
+        return User.objects.exclude(fixtures_playing=self.kwargs['pk']).filter(role="player", is_active=True, group=self.request.user.group)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -53,7 +53,7 @@ class FixtureEditPlayersView(DashboardView, ListView):
     template_name = 'dashboard/fixtures/add-players.html'
 
     def get_queryset(self):
-        return User.objects.exclude(fixtures_playing=self.kwargs['pk']).filter(role="player", is_active=True)
+        return User.objects.exclude(fixtures_playing=self.kwargs['pk']).filter(role="player", is_active=True,group=self.request.user.group)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -68,7 +68,7 @@ class FixtureAddSubtitutesView(DashboardView, ListView):
     template_name = 'dashboard/fixtures/select-subtitutes.html'
 
     def get_queryset(self):
-        return User.objects.exclude(fixtures_playing=self.kwargs['pk'], fixtures_subtituting=self.kwargs['pk']).filter(role="player", is_active=True)
+        return User.objects.exclude(fixtures_playing=self.kwargs['pk'], fixtures_subtituting=self.kwargs['pk']).filter(role="player", is_active=True, group=self.request.user.group)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -82,10 +82,11 @@ class FixtureAddSubtitutesView(DashboardView, ListView):
 class FixtureEditSubtitutesView(DashboardView, ListView):
     model = User
     context_object_name = 'users'
-    template_name = 'dashboard/fixtures/add-subtitutes.html'
+    template_name = 'trainer-dashboard/fixtures/add-subtitutes.html'
 
     def get_queryset(self):
-        return User.objects.exclude(fixtures_playing=self.kwargs['pk'], fixtures_subtituting=self.kwargs['pk']).filter(role="player", is_active=True)
+        fixture = self.kwargs.get('pk')
+        return User.objects.exclude(fixtures_playing=fixture, fixtures_subtituting=fixture).filter(role="player", is_active=True, group=self.request.user.group)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

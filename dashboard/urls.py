@@ -9,6 +9,7 @@ urlpatterns = [
     path('fixtures/', include('dashboard.routes.fixtures')),
     path('sessions/', include('dashboard.routes.sessions')),
     path('payments/', include('dashboard.routes.payments')),
+    path('blogs/', include('dashboard.routes.blogs')),
 ]
 
 

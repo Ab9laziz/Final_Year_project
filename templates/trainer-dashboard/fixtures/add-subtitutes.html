@@ -98,7 +98,7 @@ Add Subtitute Players to Fixture
         var fixtureId;
         fixtureId = '{{ fixture.id }}'
         let url = $(this).attr("data-url")
-        let successUrl = '{% url "dashboard:fixtures:fixture_details" fixture.pk %}'
+        let successUrl = '{% url "trainer_dashboard:fixtures:fixture_details" fixture.pk %}'
 
 
         console.log(`fixture is ${fixtureId}`);
