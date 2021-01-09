@@ -12,7 +12,7 @@ User = get_user_model()
 class DashboardView(LoginRequiredMixin, UserPassesTestMixin):
     def test_func(self):
         user = self.request.user
-        if user.is_staff or user.is_superuser or user.role == 'Admin':
+        if user.is_staff or user.is_superuser or user.role == 'admin':
             return True
         return False
 

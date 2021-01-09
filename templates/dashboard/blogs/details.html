@@ -1,0 +1,80 @@
+{% extends 'dashboard/base.html' %} {% load static %} {% block title %} blog Details
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 p-3 text-center">
+            <div class="py-5">
+              {% if blog.photo %}
+              <img
+                src="{{ blog.photo.url }}"
+                alt=" PYSA {{ blog.title }}"
+                class="w-50"
+                style="width:50%;"
+              />
+              {% else %}
+              <img
+                src="{% static 'home/images/logo.png' %}"
+                alt="{{ blog.title }}"
+                style="width:50%;"
+              />
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="m-3 p-3 shadow-sm">
+              <h3 class="text-center py-3">Blog Details</h3>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <th>Title</th>
+                      <td>{{ blog.title }}</td>
+                    </tr>
+                    <tr>
+                      <th>Description</th>
+                      <td>{{ blog.description }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="text-center py-3">
+                  {% comment %} <a
+                    href="{% url 'dashboard:index:blog_confirm_suspension' blog.pk %}"
+                    class="mx-1"
+                  >
+                    <button class="btn btn-warning btn-md w-50">Delete</button>
+                  </a> {% endcomment %}
+
+                  <a
+                    href="{% url 'dashboard:blogs:blog_update' blog.pk %}"
+                    class="mx-1"
+                  >
+                    <button class="btn btn-primary btn-md w-50">
+                      Edit
+                    </button>
+                  </a>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'dashboard/data-tables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'dashboard/data-tables/dataTables.bootstrap4.min.js' %}"></script>
+    <!--init datatable-->
+    <script src="{% static 'dashboard/data-tables/init-datatable.js' %}"></script>
+{% endblock %}

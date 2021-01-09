@@ -25,7 +25,9 @@
     <li>
       <a href="{% url 'dashboard:payments:payments_list' %}" class="{% if '/payments/' in request.path %}active{% endif %}">Payments</a>
     </li>
-
+    <li>
+      <a href="{% url 'dashboard:blogs:blogs_list' %}" class="{% if '/news/' in request.path %}active{% endif %}">Club News</a>
+    </li>
     <li>
       <a href="{% url 'dashboard:index:consent_forms_list' %}" class="{% if '/consent-forms' in request.path %}active{% endif %}">Consent Form</a>
     </li>
