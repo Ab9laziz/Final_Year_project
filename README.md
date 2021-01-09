@@ -17,7 +17,7 @@ Install the required libraries by running the command below
         pip install -r requirements.txt
         
 2.Clone the repository in the directory you have created the environment in.       
-3.Change directory to the location of the cloned repository
+3.Change directory to the location of the cloned repository.
 4. On the terminal, run the following command:
 
         python manage.py migrate
