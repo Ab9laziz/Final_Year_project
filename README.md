@@ -18,15 +18,15 @@ Install the required libraries by running the command below
         
 2.Clone the repository in the directory you have created the environment in.       
 3.Change directory to the location of the cloned repository
-6. On the terminal, run the following command:
+4. On the terminal, run the following command:
 
         python manage.py migrate
 
-7. A local ```dbsqlite``` file will be generated at the root of the project.
-8. Create a superuser by running the ``python manage.py createsuperuser`` and fill in the details.
-9. After creating superuser run ``python manage.py runserver`` open the browser and run  ``127.0.0.1:8000/admin`` , login with the credentials created.
-10.On the browser, the address  ''127.0.0.1:8000'' will take you to the landing page.
-11.From there, with the admin credentials you craeted,you can login and be directed to the admin dashboard.
+5. A local ```dbsqlite``` file will be generated at the root of the project.
+6. Create a superuser by running the ``python manage.py createsuperuser`` and fill in the details.
+7. After creating superuser run ``python manage.py runserver`` open the browser and run  ``127.0.0.1:8000/admin`` , login with the credentials created.
+8.On the browser, the address  ''127.0.0.1:8000'' will take you to the landing page.
+9.From there, with the admin credentials you craeted,you can login and be directed to the admin dashboard.
 
 
 ## Usage
