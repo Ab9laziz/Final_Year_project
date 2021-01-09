@@ -10,43 +10,31 @@ Football Academy management System
 
 ## Setup
 
-1. Clone the repository.
-2. Change directory to the location of this repository.
-3.Create and start your preferred Python virtual environment. For
-more information on how to set up a virtual environment, check the instructions on [this link](https://tutorial.djangogirls.org/en/django_installation/). Install the required libraries by running the commands below, by changing to
-the project directory.
+1.Create and start your preferred Python virtual environment. For
+more information on how to set up a virtual environment, check the instructions on [this link](https://tutorial.djangogirls.org/en/django_installation/).
+Install the required libraries by running the command below
 
         pip install -r requirements.txt
-
-6. After installation, run the following command:
+        
+2.Clone the repository in the directory you have created the environment in.       
+3.Change directory to the location of the cloned repository
+6. On the terminal, run the following command:
 
         python manage.py migrate
 
-7. A local ```dbsqlite``` file will be generate at the root of the project.
+7. A local ```dbsqlite``` file will be generated at the root of the project.
 8. Create a superuser by running the ``python manage.py createsuperuser`` and fill in the details.
 9. After creating superuser run ``python manage.py runserver`` open the browser and run  ``127.0.0.1:8000/admin`` , login with the credentials created.
-10. For details of how to get started with django, check out [this link](https://www.djangoproject.com/start/)
-11. In order to work with a virtual environment, check out [this link](https://tutorial.djangogirls.org/en/installation/#pythonanywhere)
+10.On the browser, the address  ''127.0.0.1:8000'' will take you to the landing page.
+11.From there, with the admin credentials you craeted,you can login and be directed to the admin dashboard.
+
 
 ## Usage
 
 To run locally:
 
     python manage.py runserver
-
-## Development
-
-Pull the latest master version:
-
-    git pull origin master
-
-Create local development branch and switch to it:
-
-    git branch {feature_branch_name}
-    git checkout {feature_branch_name}
-
-Make desired changes then commit the branch.
-
-    git add .
-    git commit -m "changes to{feature_branch_name}"
-    git push origin {feature_branch_name}
+To see player functionalities, register from the dashboard of the landing page.
+Activate the player as the admin to be able to login
+To view the trainer dashboard,create a trainer from the admin dashboard
+To view the m-pesa fee payment use the url-http://127.0.0.1:8000/lipa
