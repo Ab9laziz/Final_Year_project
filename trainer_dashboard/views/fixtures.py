@@ -16,7 +16,7 @@ User = get_user_model()
 class FixtureCreateView(DashboardView, CreateView):
     model = Fixture
     form_class = FixtureForm
-    template_name = 'dashboard/fixtures/add.html'
+    template_name = 'trainer-dashboard/fixtures/add.html'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         user = self.request.user
@@ -33,7 +33,7 @@ class FixtureCreateView(DashboardView, CreateView):
 class FixtureAddPlayersView(DashboardView, ListView):
     model = User
     context_object_name = 'users'
-    template_name = 'dashboard/fixtures/select-players.html'
+    template_name = 'trainer-dashboard/fixtures/select-players.html'
 
     def get_queryset(self):
         return User.objects.exclude(fixtures_playing=self.kwargs['pk']).filter(role="player", is_active=True, group=self.request.user.group)
@@ -50,7 +50,7 @@ class FixtureAddPlayersView(DashboardView, ListView):
 class FixtureEditPlayersView(DashboardView, ListView):
     model = User
     context_object_name = 'users'
-    template_name = 'dashboard/fixtures/add-players.html'
+    template_name = 'trainer-dashboard/fixtures/add-players.html'
 
     def get_queryset(self):
         return User.objects.exclude(fixtures_playing=self.kwargs['pk']).filter(role="player", is_active=True,group=self.request.user.group)
@@ -65,7 +65,7 @@ class FixtureEditPlayersView(DashboardView, ListView):
 class FixtureAddSubtitutesView(DashboardView, ListView):
     model = User
     context_object_name = 'users'
-    template_name = 'dashboard/fixtures/select-subtitutes.html'
+    template_name = 'trainer-dashboard/fixtures/select-subtitutes.html'
 
     def get_queryset(self):
         return User.objects.exclude(fixtures_playing=self.kwargs['pk'], fixtures_subtituting=self.kwargs['pk']).filter(role="player", is_active=True, group=self.request.user.group)
@@ -98,7 +98,7 @@ class FixtureEditSubtitutesView(DashboardView, ListView):
 class FixtureUpdateView(DashboardView, UpdateView):
     model = Fixture
     fields = ('name', 'description', 'date', 'picture')
-    template_name = 'dashboard/fixtures/edit.html'
+    template_name = 'trainer-dashboard/fixtures/edit.html'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         user = self.request.user

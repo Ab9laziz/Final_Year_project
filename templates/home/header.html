@@ -70,6 +70,7 @@
             <li><a href="{% url 'trainer_dashboard:index:index' %}">Portal</a></li>
             {% elif request.user.role == 'player' %}
             <li><a href="{% url 'player_dashboard:index:index' %}">Portal</a></li>
+            <li><a href="{% url 'lipa' %}">Pay Fees</a></li>
             {% endif %}
             <li><a href="{% url 'users:user_profile' %}">My Profile</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
