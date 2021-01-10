@@ -68,6 +68,10 @@
                       <td>{{ user.get_group_display }}</td>
                     </tr>
                     <tr>
+                      <th>Fee Balance</th>
+                      <td>Ksh {{ user.fee_balance }}</td>
+                    </tr>
+                    <tr>
                       <th>Status</th>
                       <td>
                         {% if user.is_active %}
