@@ -1,72 +1,62 @@
 {%extends 'home/base.html'%}
 {% block content %}
-<h1>Available programs</h1>
-<div>
+<div class="container-fluid">
+  <h1>Available programs</h1>
+  <div>
     <ul>
-        <li><a href="#">School based program</a></li>
-        <li><a href="#">Weekend program</a></li>
+      <li><a href="#">School based program</a></li>
+      <li><a href="#">Weekend program</a></li>
     </ul>
-</div>
-<h2>Latest News</h2>
+  </div>
+  <h2>Latest News</h2>
 
-<div class="row">
+  <div class="row">
+    {% for blog in blogs %}
     <div class="col-sm-4">
       <div class="thumbnail">
         <div class="card">
-          <img src="https://www.expresssocceracademy.com/images/raisingstars.jpg" class="img-responsive" alt="..." style="height: 290px;">
+          {% if blog.photo %}
+          <img src="{{blog.photo.url}}" class="img-responsive" alt="..." style="height: 290px;">
+          {% else %}
+          <img src="https://www.expresssocceracademy.com/images/raisingstars.jpg" class="img-responsive" alt="..."
+            style="height: 290px;">
+          {% endif %}
           <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Read More</a>
-          </div>
-        </div>
-      </div>  
-    </div>
-    <div class="col-sm-4">
-      <div class="thumbnail">
-        <div class="card">
-          <img src="https://www.expresssocceracademy.com/images/chipkizi.jpg" class="img-responsive" alt="..."> 
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Read More</a>
-          </div>
-        </div>
-      </div>  
-    </div>
-    <div class="col-sm-4">
-      <div class="thumbnail">
-          <div class="card">
-              <img src="https://www.expresssocceracademy.com/images/chipkizi.jpg" class="img-responsive" alt="...">
-              <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Read More</a>
-              </div>
-          </div>
-      </div>    
-    </div>
-</div>
-
-<div class="thumbnail">
-  <div class="card">
-      <div class="row">
-        <div class="col-md-4">
-          <img src="https://www.expresssocceracademy.com/images/raisingstars.jpg" class="img-responsive" alt="...">
-        </div>
-        <div class="col-md-4">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <a href="#" class="btn btn-primary">Read More</a>
+            <h5 class="card-title">{{ blog.title }}</h5>
+            <p class="card-text">{{ blog.description|truncatechars:40 }}</p>
+            <button class="btn btn-primary btn-sm"  data-toggle="modal"
+              data-target="#b{{ blog.id }}" data-item="{{ blog.pk }}">
+              Read More
+            </button>
           </div>
         </div>
       </div>
+    </div>
+    <div class="modal fade" id="b{{ blog.id }}" tabindex="-1" role="dialog" aria-labelledby="blogContentBody"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="blogBody">
+          <div class="modal-header">
+            <h5 class="modal-title" id="blogContentBody">
+              {{ blog.title }}
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">{{ blog.description|safe }}</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    No Club News Uploaded yet.
+    {% endfor %}
+
   </div>
 </div>
-<br>
-<br>  
 {%endblock%}
-
-
-
