@@ -1,13 +1,14 @@
-from django.contrib.auth import authenticate, get_user_model, login
 from django.contrib import messages
+from django.contrib.auth import authenticate, get_user_model, login
 from django.forms import BaseModelForm
 from django.forms.forms import Form
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import FormView, UpdateView, CreateView
+from django.views.generic import CreateView, FormView, UpdateView
+from payment.models import FeeSetting
 from users.forms import PlayerSignUpForm
-from users.models import PlayerMedicalRecord, PlayerProfile, ConsentForm
+from users.models import ConsentForm, PlayerMedicalRecord, PlayerProfile
 from users.views.base import register_redirect
 
 User = get_user_model()
@@ -32,6 +33,12 @@ class SignUpView(FormView):
         user.gender = data['gender']
         user.role = 'player'
         user.date_of_birth = data['date_of_birth']
+        # get the current fees and create the player's profile with current balance as the fee setting
+        try:
+            qs = FeeSetting.objects.last()
+        except FeeSetting.DoesNotExist:
+            return "There's no fee amount to pay set."
+        user.fee_balance = qs.amount
         user.save()
 
         # create a profile instance once registered
@@ -130,4 +137,4 @@ class ConsentFormUploadView(UpdateView):
     def get_success_url(self) -> str:
         messages.success(
             self.request, "Successfully registered, an activation email will be sent to your inbox once your details have been approved.")
-        return reverse_lazy("index")
+        return reverse_lazy("home:index")

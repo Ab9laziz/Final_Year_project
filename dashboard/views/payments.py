@@ -31,11 +31,11 @@ class FeeSettingListView(DashboardView, ListView):
     template_name = 'dashboard/payments/settings/list.html'
     context_object_name = 'settings'
 
-
 class PaymentListView(DashboardView, ListView):
     model = MpesaPayment
     context_object_name = 'payments'
     template_name = 'dashboard/payments/list.html'
+    queryset = MpesaPayment.objects.all().order_by("-created_at")
 
 
 class PaymentDetailView(DashboardView, DetailView):

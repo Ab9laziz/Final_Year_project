@@ -100,6 +100,9 @@ Add Starting 11 to Fixture
         let url = $(this).attr("data-url")
         let successUrl = '{% url "dashboard:fixtures:fixture_details" fixture.pk %}'
 
+        console.log(`fixture is ${fixtureId}`);
+        console.log(`url is ${url}`)
+        console.log(`array is ${arrayInt}`)
         $.ajax(
             {
                 type: "POST",

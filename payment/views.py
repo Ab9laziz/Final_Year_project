@@ -20,12 +20,23 @@ def lipa(request):
         if form.is_valid():
             amount = form.cleaned_data.get('amount')
             phone_number = form.cleaned_data.get('phone_number')
+            formatted_number = phone_number
+            if(phone_number[0] == '0'):
+                new_character = '254'
+                formatted_number = phone_number[:0] + new_character + phone_number[0+1:]
+            elif(phone_number[0] == '7'):
+                new_character = '2547'
+                formatted_number = phone_number[:0] + new_character + phone_number[0+1:]
+            elif(phone_number[0:4] == '254'):
+                formatted_number = phone_number
+            elif(phone_number[0:4] == '+254'):
+                new_character = ''
+                formatted_number = phone_number[:0] + new_character + phone_number[0+1:]
             user = request.user
-            remit = make_payment(phone_number, amount) 
-            balance = calculate_balance(amount)
-            MpesaPayment.objects.create(amount=amount, phone_number=phone_number, user=user, first_name=user.first_name, last_name=user.last_name)
-            # user = User.objects.get(id=user.id)
-            # user.update()
+            remit = make_payment(formatted_number, amount)
+            balance = calculate_balance(request, amount)
+            MpesaPayment.objects.create(amount=amount, phone_number=formatted_number, user=user, first_name=user.first_name, last_name=user.last_name, balance=balance)
+            user = User.objects.filter(id=user.id).update(fee_balance=balance)
 
             messages.success(request, "Your fee payment has been saved.")
             return redirect('lipa')
@@ -36,13 +47,10 @@ def lipa(request):
         return render(request, 'payment/details_form.html', {'form':form})
 
 
-def calculate_balance(amount):
-        try:
-            qs = FeeSetting.objects.last()
-        except:
-            raise ObjectDoesNotExist("The query set does not exist")
-
-        balance = qs.amount - amount
+def calculate_balance(request, amount):
+        user = request.user
+        user = User.objects.get(id=user.id)
+        balance = user.fee_balance - amount
         return balance
 
 # def lipa(request):

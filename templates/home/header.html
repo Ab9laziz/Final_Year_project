@@ -3,14 +3,14 @@
 <section class="logo-section">
   <div class="row">
     <div class="col-md-4">
-      <a href="{% url 'index'%}"
+      <a href="{% url 'home:index'%}"
         ><img
           src="\static\home\images\logobg.jpg"
           style="height: 100px; width: 150px"
       /></a>
     </div>
     <div class="col-md-8">
-      <a href="{% url 'index'%}">
+      <a href="{% url 'home:index'%}">
         <h1>Pangani youth soccer Academy</h1>
       </a>
     </div>
@@ -46,7 +46,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="nav navbar-nav">
         <li class="">
-          <a href="{% url 'index' %}"
+          <a href="{% url 'home:index' %}"
             ><span class="glyphicon glyphicon-home"></span> Home</a
           >
         </li>
@@ -70,6 +70,7 @@
             <li><a href="{% url 'trainer_dashboard:index:index' %}">Portal</a></li>
             {% elif request.user.role == 'player' %}
             <li><a href="{% url 'player_dashboard:index:index' %}">Portal</a></li>
+            <li><a href="{% url 'lipa' %}">Pay Fees</a></li>
             {% endif %}
             <li><a href="{% url 'users:user_profile' %}">My Profile</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>

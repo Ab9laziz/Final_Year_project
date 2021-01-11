@@ -6,13 +6,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from payment.views import lipa
 from payment.stk import validation, register_urls
-from home.views import IndexTemplateView
 from users.views.base import UserAccountTemplateView, logout_user, login_redirect, LoginUserView
 
 
 urlpatterns = [
-    # index page url
-    path('',IndexTemplateView.as_view(), name="index"),
 
     # authentication urls
     path('accounts/', include('allauth.urls')),
@@ -28,6 +25,7 @@ urlpatterns = [
     path('admin-dashboard/', include('dashboard.urls', namespace='dashboard')),
     path('player-dashboard/', include('player_dashboard.urls', namespace='player_dashboard')),
     path('trainer-dashboard/', include('trainer_dashboard.urls', namespace='trainer_dashboard')),
+    path('', include('home.urls')),
 
     # mpesa urls
     path('c2b/register/', register_urls, name='register_mpesa_validation'),

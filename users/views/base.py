@@ -15,7 +15,7 @@ class UserAccountTemplateView(TemplateView):
 
 def logout_user(request):
     logout(request)
-    return redirect('index')
+    return redirect('home:index')
 
 
 def login_redirect(request):
@@ -26,7 +26,7 @@ def login_redirect(request):
     elif request.user.role == 'trainer':
         return redirect('trainer_dashboard:index:index')
     else:
-        return redirect('index')
+        return redirect('home:index')
 
 
 
@@ -39,7 +39,7 @@ def register_redirect(request):
     if request.user.role == 'player':
         return redirect('players:profile_update', pk=request.user.pk)
     else:
-        return redirect('index', pk=request.user.pk)
+        return redirect('home:index', pk=request.user.pk)
 
 class RegisterUserView(UpdateView):
     def get_success_url(self):

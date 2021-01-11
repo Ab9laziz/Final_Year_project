@@ -99,14 +99,7 @@ Add Starting 11 to Fixture
         fixtureId = '{{ fixture.id }}'
         let url = $(this).attr("data-url")
         let successUrl = '{% url "dashboard:fixtures:fixture_details" fixture.pk %}'
-        console.log(successUrl)
 
-        // userRole = '{{request.user.role}}'
-        // if (userRole == 'admin') {
-        //     let successUrl = '{% url "dashboard:fixtures:fixture_details" fixture.pk %}'
-        // } else {
-        //     let successUrl = '{% url "trainer_dashboard:fixtures:fixture_details" fixture.pk %}'
-        // }
         $.ajax(
             {
                 type: "POST",

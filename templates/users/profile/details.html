@@ -74,6 +74,10 @@ User Profile
                                             <th>Training Sessions Playing</th>
                                             <td>{{ user.training_sessions_playing.count }}</td>
                                         <tr>
+                                        <tr>
+                                            <th>Fee Balance</th>
+                                            <td>Ksh {{ user.fee_balance }}</td>
+                                        <tr>
                                             {% endif %}
                                             <th>Gender</th>
                                             <td>{{ user.gender }}</td>

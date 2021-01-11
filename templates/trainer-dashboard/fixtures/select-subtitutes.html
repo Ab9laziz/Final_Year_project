@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-Add Starting 11 to Fixture
+Add Subtitute Players to Fixture
 {% endblock %}
 
 {% block styles %}
@@ -15,10 +15,10 @@ Add Starting 11 to Fixture
     <div class="col-md-12">
         <div class="card shadow-sm">
             <div class="card-body">
-                <h4 class="text-center py-3" fixture-id="{{ fixture.id }}">Add Players to Fixture </h4>
+                <h4 class="text-center py-3" fixture-id="{{ fixture.id }}">Add Subtitutes to Fixture </h4>
                 <div class="float-right mb-2">
                     <button class="btn btn-success btn-sm" id="addPlayers"
-                        data-url="{% url 'portal:fixtures_api:fixture_player_actions' %}">Add To Fixture</button>
+                        data-url="{% url 'portal:fixtures_api:fixture_sub_actions' %}">Add To Fixture</button>
                 </div>
                 <table class="table table-striped py-3" id="data_table">
                     <thead>
@@ -85,7 +85,7 @@ Add Starting 11 to Fixture
 
     $("#addPlayers").click(function () {
         var arrayString = [];
-        console.log(Array.isArray(arrayString));
+        console.log(arrayString);
         $("input:checkbox[name=checkbox-element]:checked").each(function () {
             arrayString.push($(this).val());
             console.log(`array string is ${arrayString}`)
@@ -98,8 +98,12 @@ Add Starting 11 to Fixture
         var fixtureId;
         fixtureId = '{{ fixture.id }}'
         let url = $(this).attr("data-url")
-        let successUrl = '{% url "dashboard:fixtures:fixture_details" fixture.pk %}'
 
+        let successUrl = '{% url "trainer_dashboard:fixtures:fixture_details" fixture.pk %}'
+
+        console.log(`fixture is ${fixtureId}`);
+        console.log(`url is ${url}`)
+        console.log(`array is ${arrayInt}`)
         $.ajax(
             {
                 type: "POST",
@@ -113,7 +117,7 @@ Add Starting 11 to Fixture
                 window.location.replace(`${successUrl}`);
             }).done(function(data){
                 swal({
-                    title: "Players added to Fixture",
+                    title: "Subtitute Players added to Fixture",
                     icon: "success",
                     timer: 6000,
                 });
