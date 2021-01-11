@@ -11,5 +11,3 @@ urlpatterns = [
     path('payments/', include('dashboard.routes.payments')),
     path('blogs/', include('dashboard.routes.blogs')),
 ]
-
-
