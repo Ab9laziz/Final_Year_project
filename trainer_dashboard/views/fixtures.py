@@ -16,7 +16,7 @@ User = get_user_model()
 class FixtureCreateView(DashboardView, CreateView):
     model = Fixture
     form_class = FixtureForm
-    template_name = 'trainer-dashboard/fixtures/add.html'
+    template_name = 'dashboard/fixtures/add.html'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         user = self.request.user
