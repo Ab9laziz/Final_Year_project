@@ -98,8 +98,8 @@ Add Players for training
         var fixtureId;
         fixtureId = '{{ fixture.id }}'
         let url = $(this).attr("data-url")
-        let successUrl = '{% url "dashboard:sessions:session_details" fixture.pk %}'
 
+        let successUrl = '{% url "trainer_dashboard:sessions:session_details" fixture.pk %}'
         $.ajax(
             {
                 type: "POST",

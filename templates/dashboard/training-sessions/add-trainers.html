@@ -100,13 +100,6 @@ Add Trainers to Training Session
         let url = $(this).attr("data-url")
         let successUrl = '{% url "dashboard:sessions:session_details" fixture.pk %}'
 
-        userRole = '{{request.user.role}}'
-        if (userRole == 'admin') {
-            let successUrl = '{% url "dashboard:sessions:session_details" fixture.pk %}'
-        } else {
-            let successUrl = '{% url "trainer_dashboard:sessions:session_details" fixture.pk %}'
-        }
-
         $.ajax(
             {
                 type: "POST",

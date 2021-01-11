@@ -32,7 +32,7 @@ class TrainingSessionCreateView(DashboardView, CreateView):
 class TrainingSessionAddPlayersView(DashboardView, ListView):
     model = User
     context_object_name = 'users'
-    template_name = 'dashboard/training-sessions/select-players.html'
+    template_name = 'trainer-dashboard/training-sessions/select-players.html'
 
     def get_queryset(self):
         user = self.request.user
@@ -50,7 +50,7 @@ class TrainingSessionAddPlayersView(DashboardView, ListView):
 class TrainingSessionEditPlayersView(DashboardView, ListView):
     model = User
     context_object_name = 'users'
-    template_name = 'dashboard/training-sessions/add-players.html'
+    template_name = 'trainer-dashboard/training-sessions/add-players.html'
 
     def get_queryset(self):
         user = self.request.user
@@ -66,7 +66,7 @@ class TrainingSessionEditPlayersView(DashboardView, ListView):
 class TrainingSessionAddTrainersView(DashboardView, ListView):
     model = User
     context_object_name = 'users'
-    template_name = 'dashboard/training-sessions/select-trainers.html'
+    template_name = 'trainer-dashboard/training-sessions/select-trainers.html'
 
     def get_queryset(self):
         user = self.request.user
@@ -84,7 +84,7 @@ class TrainingSessionAddTrainersView(DashboardView, ListView):
 class TrainingSessionEditTrainersView(DashboardView, ListView):
     model = User
     context_object_name = 'users'
-    template_name = 'dashboard/training-sessions/add-trainers.html'
+    template_name = 'trainer-dashboard/training-sessions/add-trainers.html'
 
     def get_queryset(self):
         user = self.request.user
@@ -100,7 +100,7 @@ class TrainingSessionEditTrainersView(DashboardView, ListView):
 class TrainingSessionUpdateView(DashboardView, UpdateView):
     model = TrainingSession
     form_class = TrainingSessionForm
-    template_name = 'trainer-dashboard/training-sessions/edit.html'
+    template_name = 'dashboard/training-sessions/edit.html'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         user = self.request.user

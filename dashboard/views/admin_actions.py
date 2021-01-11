@@ -54,7 +54,10 @@ def fixture_remove_player(request, pk, user_pk):
     fixture.starting_players.remove(player)
     fixture.save()
     messages.success(request, "Player Removed from Starting Team")
-    return redirect('dashboard:fixtures:fixture_details', pk=pk)
+    if request.user.role == 'admin':
+        return redirect('dashboard:fixtures:fixture_details', pk=pk)
+    elif request.user.role == 'trainer':
+        return redirect('trainer_dashboard:fixtures:fixture_details', pk=pk)
 
 
 def fixture_remove_subtitute(request, pk, user_pk):
@@ -63,7 +66,11 @@ def fixture_remove_subtitute(request, pk, user_pk):
     fixture.subtitutes.remove(player)
     fixture.save()
     messages.success(request, "Player Removed from List of Subtitutes")
-    return redirect('dashboard:fixtures:fixture_details', pk=pk)
+    user = request.user
+    if user.role == 'admin':
+        return redirect('dashboard:fixtures:fixture_details', pk=pk)
+    elif user.role == 'trainer':
+        return redirect('trainer_dashboard:fixtures:fixture_details', pk=pk)
 
 
 def training_remove_player(request, pk, user_pk):
@@ -72,7 +79,11 @@ def training_remove_player(request, pk, user_pk):
     session.players.remove(player)
     session.save()
     messages.success(request, "Player Removed from List of Players")
-    return redirect('dashboard:sessions:session_details', pk=pk)
+    user = request.user
+    if user.role == 'admin':
+        return redirect('dashboard:sessions:session_details', pk=pk)
+    elif user.role == 'trainer':
+        return redirect('trainer_dashboard:sessions:session_details', pk=pk)
 
 
 def training_remove_trainer(request, pk, user_pk):

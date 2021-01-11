@@ -66,13 +66,12 @@ class FixtureAddSubtitutesView(ListView):
     context_object_name = 'users'
     template_name = 'dashboard/fixtures/select-subtitutes.html'
 
-    def get_queryset(self):
-        return User.objects.exclude(fixtures_playing=self.kwargs['pk'], fixtures_subtituting=self.kwargs['pk']).filter(role="player", is_active=True)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["fixture"] = Fixture.objects.get(
             id=self.kwargs['pk'])
+        fixture_users = context['fixture'].starting_players.all() | context['fixture'].subtitutes.all()
+        context['users'] = User.objects.exclude(id__in=fixture_users).filter(role="player", is_active=True)
         return context
 
 # add subtitutes to an existing fixture
@@ -83,13 +82,15 @@ class FixtureEditSubtitutesView(ListView):
     context_object_name = 'users'
     template_name = 'dashboard/fixtures/add-subtitutes.html'
 
-    def get_queryset(self):
-        return User.objects.exclude(fixtures_playing=self.kwargs['pk'], fixtures_subtituting=self.kwargs['pk']).filter(role="player", is_active=True)
+    # def get_queryset(self):
+    #     return User.objects.exclude(fixtures_playing=self.kwargs['pk'], fixtures_subtituting=self.kwargs['pk']).filter(role="player", is_active=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["fixture"] = Fixture.objects.get(
             id=self.kwargs['pk'])
+        fixture_users = context['fixture'].starting_players.all() | context['fixture'].subtitutes.all()
+        context['users'] = User.objects.exclude(id__in=fixture_users).filter(role="player", is_active=True)
         return context
 
 

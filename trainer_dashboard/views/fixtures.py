@@ -16,7 +16,7 @@ User = get_user_model()
 class FixtureCreateView(DashboardView, CreateView):
     model = Fixture
     form_class = FixtureForm
-    template_name = 'trainer-dashboard/fixtures/add.html'
+    template_name = 'dashboard/fixtures/add.html'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         user = self.request.user
@@ -35,13 +35,12 @@ class FixtureAddPlayersView(DashboardView, ListView):
     context_object_name = 'users'
     template_name = 'trainer-dashboard/fixtures/select-players.html'
 
-    def get_queryset(self):
-        return User.objects.exclude(fixtures_playing=self.kwargs['pk']).filter(role="player", is_active=True, group=self.request.user.group)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["fixture"] = Fixture.objects.get(
             id=self.kwargs['pk'])
+        fixture_users = context['fixture'].starting_players.all() | context['fixture'].subtitutes.all()
+        context['users'] = User.objects.exclude(id__in=fixture_users).filter(role="player", is_active=True)
         return context
 
 # add players to an existing fixture
@@ -52,13 +51,12 @@ class FixtureEditPlayersView(DashboardView, ListView):
     context_object_name = 'users'
     template_name = 'trainer-dashboard/fixtures/add-players.html'
 
-    def get_queryset(self):
-        return User.objects.exclude(fixtures_playing=self.kwargs['pk']).filter(role="player", is_active=True,group=self.request.user.group)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["fixture"] = Fixture.objects.get(
             id=self.kwargs['pk'])
+        fixture_users = context['fixture'].starting_players.all() | context['fixture'].subtitutes.all()
+        context['users'] = User.objects.exclude(id__in=fixture_users).filter(role="player", is_active=True)
         return context
 
 
@@ -67,13 +65,12 @@ class FixtureAddSubtitutesView(DashboardView, ListView):
     context_object_name = 'users'
     template_name = 'trainer-dashboard/fixtures/select-subtitutes.html'
 
-    def get_queryset(self):
-        return User.objects.exclude(fixtures_playing=self.kwargs['pk'], fixtures_subtituting=self.kwargs['pk']).filter(role="player", is_active=True, group=self.request.user.group)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["fixture"] = Fixture.objects.get(
             id=self.kwargs['pk'])
+        fixture_users = context['fixture'].starting_players.all() | context['fixture'].subtitutes.all()
+        context['users'] = User.objects.exclude(id__in=fixture_users).filter(role="player", is_active=True)
         return context
 
 # add subtitutes to an existing fixture
@@ -84,21 +81,19 @@ class FixtureEditSubtitutesView(DashboardView, ListView):
     context_object_name = 'users'
     template_name = 'trainer-dashboard/fixtures/add-subtitutes.html'
 
-    def get_queryset(self):
-        fixture = self.kwargs.get('pk')
-        return User.objects.exclude(fixtures_playing=fixture, fixtures_subtituting=fixture).filter(role="player", is_active=True, group=self.request.user.group)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["fixture"] = Fixture.objects.get(
             id=self.kwargs['pk'])
+        fixture_users = context['fixture'].starting_players.all() | context['fixture'].subtitutes.all()
+        context['users'] = User.objects.exclude(id__in=fixture_users).filter(role="player", is_active=True)
         return context
 
 
 class FixtureUpdateView(DashboardView, UpdateView):
     model = Fixture
     fields = ('name', 'description', 'date', 'picture')
-    template_name = 'trainer-dashboard/fixtures/edit.html'
+    template_name = 'dashboard/fixtures/edit.html'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         user = self.request.user
